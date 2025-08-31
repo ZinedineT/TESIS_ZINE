@@ -29,37 +29,39 @@ export const BlogCard: React.FC<BlogCardProps> = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       className={`
-        bg-white dark:bg-gray-800 
-        rounded-xl 
-        shadow-lg 
-        hover:shadow-xl 
-        overflow-hidden 
-        transition-shadow 
+        bg-white dark:bg-gray-800
+        rounded-xl
+        shadow-lg
+        hover:shadow-xl
+        overflow-hidden
+        transition-shadow
         duration-300
-        border 
-        border-gray-200 
+        border
+        border-gray-200
         dark:border-gray-700
         cursor-pointer
+          h-full // ← Esto hace que ocupe toda la altura del grid
+          flex-col // ←
         ${className}
       `}
     >
       <div className="aspect-video overflow-hidden">
-        <img 
-          src={image} 
+        <img
+          src={image}
           alt={title}
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
         />
       </div>
-      
+
       <div className="p-6">
         <Typography variant="h6" color="default" className="mb-3 line-clamp-2">
           {title}
         </Typography>
-        
+
         <Typography variant="body" color="muted" className="mb-4 line-clamp-3">
           {excerpt}
         </Typography>
-        
+
         <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
           <div className="flex items-center gap-1">
             <Calendar size={14} />

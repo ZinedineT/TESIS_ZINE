@@ -28,27 +28,27 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
       className={`
-        bg-white dark:bg-gray-800 
-        rounded-xl 
-        shadow-lg 
-        hover:shadow-xl 
-        overflow-hidden 
-        transition-shadow 
+        bg-white dark:bg-gradient-to-r from-gray-800 to-gray-900
+        rounded-xl
+        shadow-lg
+        hover:shadow-xl
+        overflow-hidden
+        transition-shadow
         duration-300
-        border 
-        border-gray-200 
+        border
+        border-gray-200
         dark:border-gray-700
         ${className}
       `}
     >
       <div className="aspect-video overflow-hidden">
-        <img 
-          src={image} 
+        <img
+          src={image}
           alt={title}
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
         />
       </div>
-      
+
       <div className="p-6">
         <div className="flex justify-between items-start mb-3">
           <Typography variant="h5" color="default">
@@ -60,11 +60,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             </span>
           )}
         </div>
-        
+
         <Typography variant="body" color="muted" className="mb-4">
           {description}
         </Typography>
-        
+
         {features.length > 0 && (
           <ul className="space-y-1 mb-4">
             {features.map((feature, index) => (
@@ -75,9 +75,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             ))}
           </ul>
         )}
-        
-        <Button 
-          variant="outline" 
+
+        <Button
+          variant="outline"
           size="sm"
           icon={ExternalLink}
           iconPosition="right"

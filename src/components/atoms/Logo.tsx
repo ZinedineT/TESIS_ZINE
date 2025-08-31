@@ -1,5 +1,6 @@
 import React from 'react';
-import { Building2 } from 'lucide-react';
+import logo from '../../assets/favicon.png';
+import { useTheme } from '../../contexts/ThemeContext';
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
@@ -7,6 +8,7 @@ interface LogoProps {
 }
 
 export const Logo: React.FC<LogoProps> = ({ size = 'md', className = '' }) => {
+  const { theme } = useTheme();
   const sizeClasses = {
     sm: 'h-6 w-6 text-lg',
     md: 'h-8 w-8 text-xl',
@@ -15,12 +17,19 @@ export const Logo: React.FC<LogoProps> = ({ size = 'md', className = '' }) => {
 
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <div className="p-2 rounded-lg bg-primary-500 text-white">
-        <Building2 className={sizeClasses[size]} />
-      </div>
-      <span className={`font-bold text-primary-500 ${size === 'lg' ? 'text-2xl' : size === 'md' ? 'text-xl' : 'text-lg'}`}>
-        Cistcor
+      <img
+        src={logo}
+        alt="Logo Cistcor"
+        className={`${sizeClasses[size]} w-auto`} // Mantiene proporción
+      />
+      <span
+        className={`font-semibold ${
+          theme === 'dark' ? 'text-white' : 'text-black'
+        } ${size === 'lg' ? 'text-2xl' : size === 'md' ? 'text-xl' : 'text-lg'}`}
+      >
+        CISTCOR
       </span>
+
     </div>
   );
 };

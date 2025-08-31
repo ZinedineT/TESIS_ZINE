@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
+import { Bot } from 'lucide-react';
 import { Logo } from '../atoms/Logo';
 import { Navigation } from '../molecules/Navigation';
 import { ThemeToggle } from '../atoms/ThemeToggle';
@@ -24,21 +24,16 @@ export const Header: React.FC = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <ThemeToggle />
-            
             {/* AI Chatbot Placeholder */}
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               size="sm"
-              icon={MessageCircle}
+              icon={Bot}
               className="hidden sm:flex"
             >
-              IA Assistant
+              Chatbot
             </Button>
-            
-            <Button variant="primary" size="sm" className="hidden sm:flex">
-              Contacto
-            </Button>
+            <ThemeToggle />
           </div>
         </div>
       </div>
