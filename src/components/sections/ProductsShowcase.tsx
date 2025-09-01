@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ProductCard } from '../molecules/ProductCard';
 import { Typography } from '../atoms/Typography';
-import { Button } from '../atoms/Button';
-import { Sparkles } from 'lucide-react';
+// import { Button } from '../atoms/Button';
+// import { Sparkles } from 'lucide-react';
 
 const products = [
   {
@@ -37,7 +37,7 @@ export const ProductsShowcase: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 h-full"
         >
           <Typography variant="h2" color="default" className="mb-6">
             Productos Destacados
@@ -48,7 +48,7 @@ export const ProductsShowcase: React.FC = () => {
         </motion.div>
 
         {/* AI Recommendations Placeholder */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -67,7 +67,7 @@ export const ProductsShowcase: React.FC = () => {
               Notificarme cuando esté listo
             </Button>
           </div>
-        </motion.div>
+        </motion.div> */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product, index) => (
@@ -75,6 +75,7 @@ export const ProductsShowcase: React.FC = () => {
               key={product.title}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
+              className='h-full'
               transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
             >
               <ProductCard {...product} />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ProductsShowcase } from '../components/organisms/ProductsShowcase';
+import { ProductsShowcase } from '../components/sections/ProductsShowcase';
 import { Typography } from '../components/atoms/Typography';
 import { Button } from '../components/atoms/Button';
 import { Zap, Shield, Users, BarChart3 } from 'lucide-react';

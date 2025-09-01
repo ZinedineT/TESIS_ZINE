@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
 import { Logo } from '../atoms/Logo';
 import { Typography } from '../atoms/Typography';
 
@@ -18,10 +18,10 @@ export const Footer: React.FC = () => {
           >
             <Logo size="lg" className="text-white" />
             <Typography variant="body" color="muted">
-              Soluciones tecnológicas innovadoras para impulsar el crecimiento de tu empresa.
+              Empresa 100% peruana especializada en brindar productos y servicios tecnológicos a empresas de diferentes sectores.
             </Typography>
             <div className="flex space-x-4">
-              {[Facebook, Twitter, Linkedin, Instagram].map((Icon, index) => (
+              {[Facebook, Instagram, Youtube].map((Icon, index) => (
                 <motion.a
                   key={index}
                   whileHover={{ scale: 1.1 }}
@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
               Servicios
             </Typography>
             <ul className="space-y-2">
-              {['Desarrollo Web', 'Consultoría IT', 'Cloud Computing', 'Seguridad', 'Automatización'].map((service) => (
+              {['Facturación Electrónica', 'Diseño Web', 'Correo Corporativo', 'Soporte TIC'].map((service) => (
                 <li key={service}>
                   <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
                     {service}
@@ -63,10 +63,10 @@ export const Footer: React.FC = () => {
             className="space-y-4"
           >
             <Typography variant="h6" color="default">
-              Enlaces Rápidos
+              Contáctanos
             </Typography>
             <ul className="space-y-2">
-              {['Inicio', 'Nosotros', 'Productos', 'Blog', 'Contacto'].map((link) => (
+              {['Jr. San Martin 1224 - Huánuco', 'Ventas: 944 735 227 ', 'Ventas: 989 889 371', 'Soporte: 986 687 711', 'comercial@cistcor.com','soporte@cistcor.com'].map((link) => (
                 <li key={link}>
                   <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
                     {link}
@@ -93,11 +93,11 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={16} className="text-primary-500" />
-                <span className="text-gray-400">+34 900 123 456</span>
+                <span className="text-gray-400">944 735 22</span>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin size={16} className="text-primary-500" />
-                <span className="text-gray-400">Madrid, España</span>
+                <span className="text-gray-400">Huanuco, Perú</span>
               </div>
             </div>
           </motion.div>
@@ -111,7 +111,7 @@ export const Footer: React.FC = () => {
           className="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <Typography variant="caption" color="muted">
-            © 2025 Cistcor. Todos los derechos reservados.
+            Copyright 2025 © CISTCOR NETWORKS S.A.C.
           </Typography>
           <div className="flex gap-6">
             <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
-import { Header } from '../organisms/Header';
-import { Footer } from '../organisms/Footer';
+import { Header } from '../sections/Header';
+import { Footer } from '../sections/Footer';
 
 interface PageLayoutProps {
   children: React.ReactNode;

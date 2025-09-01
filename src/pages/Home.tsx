@@ -1,16 +1,20 @@
 import React from 'react';
-import { HeroSection } from '../components/organisms/HeroSection';
-import { ServicesGrid } from '../components/organisms/ServicesGrid';
-import { ProductsShowcase } from '../components/organisms/ProductsShowcase';
-import { BlogGrid } from '../components/organisms/BlogGrid';
+import { HeroSection } from '../components/sections/HeroSection';
+import { ServicesGrid } from '../components/sections/ServicesGrid';
+import FunctionalitySection from '../components/sections/FunctionalitySection';
+// import { ProductsShowcase } from '../components/sections/ProductsShowcase';
+// import { BlogGrid } from '../components/sections/BlogGrid';
+import TrustSection  from '../components/sections/TrustSection';
 
 export const Home: React.FC = () => {
   return (
     <>
       <HeroSection />
       <ServicesGrid />
-      <ProductsShowcase />
-      <BlogGrid />
+      <FunctionalitySection/>
+      <TrustSection/>
+      {/* <ProductsShowcase /> */}
+      {/* <BlogGrid /> */}
     </>
   );
 };

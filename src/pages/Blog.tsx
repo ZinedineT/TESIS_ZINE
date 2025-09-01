@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BlogGrid } from '../components/organisms/BlogGrid';
+import { BlogGrid } from '../components/sections/BlogGrid';
 import { Typography } from '../components/atoms/Typography';
 import { Button } from '../components/atoms/Button';
 import { Search, Filter } from 'lucide-react';

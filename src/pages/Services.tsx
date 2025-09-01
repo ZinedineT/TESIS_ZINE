@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ServicesGrid } from '../components/organisms/ServicesGrid';
+import { ServicesGrid } from '../components/sections/ServicesGrid';
 import { Typography } from '../components/atoms/Typography';
 import { Button } from '../components/atoms/Button';
 import { Calendar } from 'lucide-react';
