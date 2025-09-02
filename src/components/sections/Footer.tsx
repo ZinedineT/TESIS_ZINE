@@ -1,10 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
+import { FaTiktok } from "react-icons/fa";
 import { Logo } from '../atoms/Logo';
 import { Typography } from '../atoms/Typography';
 
-export const Footer: React.FC = () => {
+export const Footer = () => {
+  // Objeto con las URLs de las redes sociales
+  const socialLinks = [
+    { Icon: Facebook, url: 'https://web.facebook.com/cistcor', label: 'Facebook' },
+    { Icon: Instagram, url: 'https://www.instagram.com/cistcor/', label: 'Instagram' },
+    { Icon: Youtube, url: 'https://www.youtube.com/@Cistcor', label: 'YouTube' },
+    { Icon: FaTiktok, url: 'https://www.tiktok.com/@cistcor', label: 'TikTok' }
+  ];
+
   return (
     <footer className="bg-white/80 dark:bg-gray-900/80 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -18,17 +27,20 @@ export const Footer: React.FC = () => {
           >
             <Logo size="lg" className="text-white" />
             <Typography variant="body" color="muted">
-              Empresa 100% peruana especializada en brindar productos y servicios tecnológicos a empresas de diferentes sectores.
+              Empresa peruana especializada en brindar productos y servicios tecnológicos a empresas de diferentes sectores.
             </Typography>
             <div className="flex space-x-4">
-              {[Facebook, Instagram, Youtube].map((Icon, index) => (
+              {socialLinks.map(({ Icon, url, label }, index) => (
                 <motion.a
                   key={index}
                   whileHover={{ scale: 1.1 }}
-                  href="#"
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors duration-200"
+                  aria-label={`Visita nuestro perfil en ${label}`}
                 >
-                  <Icon size={20} />
+                  <Icon size={30} />
                 </motion.a>
               ))}
             </div>
@@ -47,7 +59,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2">
               {['Facturación Electrónica', 'Diseño Web', 'Correo Corporativo', 'Soporte TIC'].map((service) => (
                 <li key={service}>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  <a href="#" className="text-gray-500 hover:text-white transition-colors duration-200">
                     {service}
                   </a>
                 </li>
@@ -66,10 +78,17 @@ export const Footer: React.FC = () => {
               Contáctanos
             </Typography>
             <ul className="space-y-2">
-              {['Jr. San Martin 1224 - Huánuco', 'Ventas: 944 735 227 ', 'Ventas: 989 889 371', 'Soporte: 986 687 711', 'comercial@cistcor.com','soporte@cistcor.com'].map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                    {link}
+              {[
+                { text: 'Jr. San Martin 1224 - Huánuco', href: '#' },
+                { text: 'Ventas: 944 735 227', href: 'https://wa.link/o4zoyc' },
+                { text: 'Ventas: 989 889 371', href: 'https://wa.link/o4zoyc' },
+                { text: 'Soporte: 986 687 711', href: 'https://wa.link/o4zoyc' },
+                { text: 'comercial@cistcor.com', href: 'mailto:comercial@cistcor.com' },
+                { text: 'soporte@cistcor.com', href: 'mailto:soporte@cistcor.com' },
+              ].map(({ text, href }) => (
+                <li key={text}>
+                  <a href={href} className="text-gray-500 hover:text-white transition-colors duration-200">
+                    {text}
                   </a>
                 </li>
               ))}
@@ -89,15 +108,19 @@ export const Footer: React.FC = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <Mail size={16} className="text-primary-500" />
-                <span className="text-gray-400">info@cistcor.com</span>
+                <a href="mailto:info@cistcor.com" className="text-gray-500 hover:text-white transition-colors duration-200">
+                  info@cistcor.com
+                </a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={16} className="text-primary-500" />
-                <span className="text-gray-400">944 735 22</span>
+                <a href="tel:+51944735227" className="text-gray-500 hover:text-white transition-colors duration-200">
+                  944 735 227
+                </a>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin size={16} className="text-primary-500" />
-                <span className="text-gray-400">Huanuco, Perú</span>
+                <span className="text-gray-500">Huanuco, Perú</span>
               </div>
             </div>
           </motion.div>
@@ -108,19 +131,11 @@ export const Footer: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4"
+          className="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-center items-center gap-4"
         >
           <Typography variant="caption" color="muted">
             Copyright 2025 © CISTCOR NETWORKS S.A.C.
           </Typography>
-          <div className="flex gap-6">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">
-              Política de Privacidad
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">
-              Términos de Uso
-            </a>
-          </div>
         </motion.div>
       </div>
     </footer>

@@ -5,6 +5,7 @@ import FunctionalitySection from '../components/sections/FunctionalitySection';
 // import { ProductsShowcase } from '../components/sections/ProductsShowcase';
 // import { BlogGrid } from '../components/sections/BlogGrid';
 import TrustSection  from '../components/sections/TrustSection';
+import PricingSection from '../components/sections/PricingSection';
 
 export const Home: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ export const Home: React.FC = () => {
       <HeroSection />
       <ServicesGrid />
       <FunctionalitySection/>
+      <PricingSection/>
       <TrustSection/>
       {/* <ProductsShowcase /> */}
       {/* <BlogGrid /> */}

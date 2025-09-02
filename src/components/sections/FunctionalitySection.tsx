@@ -87,11 +87,11 @@ const FunctionalitySection: React.FC = () => {
           className="text-center mb-16"
         >
           <Typography variant="h2" color="default" className="mb-4">
-            Funcionalidades Potentes
+            <span className='text-primary-500'>Beneficios</span> Clave
           </Typography>
-          <Typography variant="body" color="muted" className="max-w-3xl mx-auto">
+          {/* <Typography variant="body" color="muted" className="max-w-3xl mx-auto">
             Descubre cómo nuestro sistema de facturación electrónica simplifica tus procesos y optimiza tu negocio.
-          </Typography>
+          </Typography> */}
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -126,7 +126,7 @@ const FunctionalitySection: React.FC = () => {
                     </div>
                     <div className="ml-4">
                       <Typography 
-                        variant="h4" 
+                        variant="h5" 
                         color="default" 
                         className={`font-semibold ${
                           activeTab === index ? 'text-primary-600' : ''
@@ -138,7 +138,7 @@ const FunctionalitySection: React.FC = () => {
                       {/* Lista de características (solo visible en activo) */}
                       {activeTab === index && (
                         <ul className="mt-4 space-y-2">
-                                                  <Typography variant="body" color="muted" className="mt-2">
+                          <Typography variant="body" color="muted" className="mt-2">
                         {func.description}
                       </Typography>
                           {func.features.map((feature, i) => (
