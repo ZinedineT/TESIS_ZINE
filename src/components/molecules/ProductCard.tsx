@@ -38,6 +38,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         border
         border-gray-200
         dark:border-gray-700
+        h-full
         ${className}
       `}
     >

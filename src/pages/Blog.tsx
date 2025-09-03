@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BlogGrid } from '../components/sections/BlogGrid';
+// import { BlogGrid } from '../components/sections/BlogGrid';
 import { Typography } from '../components/atoms/Typography';
 import { Button } from '../components/atoms/Button';
 import { Search, Filter } from 'lucide-react';
@@ -45,14 +45,14 @@ export const Blog: React.FC = () => {
         </motion.div>
       </div>
       
-      <BlogGrid />
+      {/* <BlogGrid /> */}
       
       {/* Newsletter Section */}
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="py-20 bg-primary-50 dark:bg-primary-900/20"
+        className="py-20"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Typography variant="h2" color="default" className="mb-6">

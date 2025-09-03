@@ -24,6 +24,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       transition={{ duration: 0.3 }}
       className={`
         p-6 
+        h-full
         bg-white dark:bg-gray-800 
         rounded-xl 
         shadow-lg 

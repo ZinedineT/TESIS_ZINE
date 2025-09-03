@@ -15,7 +15,7 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-white/80 dark:bg-gray-900/80 text-white">
+    <footer className="bg-white/80 dark:bg-gray-900/80 border-t border-gray-200 dark:border-gray-700 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -25,25 +25,10 @@ export const Footer = () => {
             transition={{ duration: 0.5 }}
             className="space-y-4"
           >
-            <Logo size="lg" className="text-white" />
+            <Logo size="lg" className="text-white text-justify" />
             <Typography variant="body" color="muted">
-              Empresa peruana especializada en brindar productos y servicios tecnológicos a empresas de diferentes sectores.
+              Especializados en brindar servicios tecnológicos a empresas de diferentes sectores.
             </Typography>
-            <div className="flex space-x-4">
-              {socialLinks.map(({ Icon, url, label }, index) => (
-                <motion.a
-                  key={index}
-                  whileHover={{ scale: 1.1 }}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
-                  aria-label={`Visita nuestro perfil en ${label}`}
-                >
-                  <Icon size={30} />
-                </motion.a>
-              ))}
-            </div>
           </motion.div>
 
           {/* Services */}
@@ -61,34 +46,6 @@ export const Footer = () => {
                 <li key={service}>
                   <a href="#" className="text-gray-500 hover:text-white transition-colors duration-200">
                     {service}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-4"
-          >
-            <Typography variant="h6" color="default">
-              Contáctanos
-            </Typography>
-            <ul className="space-y-2">
-              {[
-                { text: 'Jr. San Martin 1224 - Huánuco', href: '#' },
-                { text: 'Ventas: 944 735 227', href: 'https://wa.link/o4zoyc' },
-                { text: 'Ventas: 989 889 371', href: 'https://wa.link/o4zoyc' },
-                { text: 'Soporte: 986 687 711', href: 'https://wa.link/o4zoyc' },
-                { text: 'comercial@cistcor.com', href: 'mailto:comercial@cistcor.com' },
-                { text: 'soporte@cistcor.com', href: 'mailto:soporte@cistcor.com' },
-              ].map(({ text, href }) => (
-                <li key={text}>
-                  <a href={href} className="text-gray-500 hover:text-white transition-colors duration-200">
-                    {text}
                   </a>
                 </li>
               ))}
@@ -123,6 +80,48 @@ export const Footer = () => {
                 <span className="text-gray-500">Huanuco, Perú</span>
               </div>
             </div>
+          </motion.div>
+                    {/* Quick Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="space-y-4"
+          >
+            <Typography variant="h6" color="default">
+              Visitanos en Redes
+            </Typography>
+            <div className="flex space-x-4">
+              {socialLinks.map(({ Icon, url, label }, index) => (
+                <motion.a
+                  key={index}
+                  whileHover={{ scale: 1.1 }}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                  aria-label={`Visita nuestro perfil en ${label}`}
+                >
+                  <Icon size={30} />
+                </motion.a>
+              ))}
+            </div>
+            {/* <ul className="space-y-2">
+              {[
+                { text: 'Jr. San Martin 1224 - Huánuco', href: '#' },
+                { text: 'Ventas: 944 735 227', href: 'https://wa.link/o4zoyc' },
+                // { text: 'Ventas: 989 889 371', href: 'https://wa.link/o4zoyc' },
+                // { text: 'Soporte: 986 687 711', href: 'https://wa.link/o4zoyc' },
+                { text: 'comercial@cistcor.com', href: 'mailto:comercial@cistcor.com' },
+                // { text: 'soporte@cistcor.com', href: 'mailto:soporte@cistcor.com' },
+              ].map(({ text, href }) => (
+                <li key={text}>
+                  <a href={href} className="text-gray-500 hover:text-white transition-colors duration-200">
+                    {text}
+                  </a>
+                </li>
+              ))}
+            </ul> */}
           </motion.div>
         </div>
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, ChevronDown, ArrowRight } from 'lucide-react';
 import { Typography } from '../atoms/Typography';
-import pdfFile from '../../assets/pdf/planes-cistcor.pdf'; // Adjust the path as needed
+import pdfFile from '../../assets/pdf/planes-cistcor.pdf'; 
 
 const PricingSection: React.FC = () => {
   const [billingCycle, setBillingCycle] = useState('mensual');

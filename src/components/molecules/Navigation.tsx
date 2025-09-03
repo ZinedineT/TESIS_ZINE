@@ -25,7 +25,7 @@ export const Navigation: React.FC = () => {
             key={item.path}
             to={item.path}
             className={`
-              text-sm font-medium transition-colors duration-200 hover:text-primary-500
+              text-base font-medium transition-colors duration-200 hover:text-primary-500
               ${location.pathname === item.path 
                 ? 'text-primary-500' 
                 : 'text-gray-700 dark:text-gray-300'

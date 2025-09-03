@@ -4,7 +4,7 @@ interface TypographyProps {
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body' | 'caption' | 'overline';
   children: React.ReactNode;
   className?: string;
-  color?: 'primary' | 'secondary' | 'accent' | 'muted' | 'default';
+  color?: 'primary' | 'secondary' | 'accent' | 'muted' | 'default' | 'success' | 'error';
 }
 
 export const Typography: React.FC<TypographyProps> = ({
@@ -19,6 +19,8 @@ export const Typography: React.FC<TypographyProps> = ({
     accent: 'text-accent-500',
     muted: 'text-gray-600 dark:text-gray-400',
     default: 'text-gray-900 dark:text-gray-100',
+    success: 'text-success-500',
+    error: 'text-error-500',
   };
 
   const variantClasses = {
@@ -33,7 +35,7 @@ export const Typography: React.FC<TypographyProps> = ({
     overline: 'text-xs uppercase tracking-wider font-medium',
   };
 
-  const Component = variant.startsWith('h') ? variant as keyof JSX.IntrinsicElements : 'p';
+  const Component = variant.startsWith('h') ? (variant as keyof JSX.IntrinsicElements) : 'p';
 
   return (
     <Component className={`${variantClasses[variant]} ${colorClasses[color]} ${className}`}>
