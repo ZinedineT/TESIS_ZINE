@@ -8,7 +8,7 @@ const navItems = [
   { path: '/servicios', label: 'Servicios' },
   { path: '/nosotros', label: 'Nosotros' },
   { path: '/productos', label: 'Productos' },
-  { path: '/blog', label: 'Blog' },
+  // { path: '/blog', label: 'Blog' },
   { path: '/contacto', label: 'Contacto' },
 ];
 
@@ -26,8 +26,8 @@ export const Navigation: React.FC = () => {
             to={item.path}
             className={`
               text-base font-medium transition-colors duration-200 hover:text-primary-500
-              ${location.pathname === item.path 
-                ? 'text-primary-500' 
+              ${location.pathname === item.path
+                ? 'text-primary-500'
                 : 'text-gray-700 dark:text-gray-300'
               }
             `}
@@ -62,8 +62,8 @@ export const Navigation: React.FC = () => {
                 onClick={() => setIsOpen(false)}
                 className={`
                   block px-4 py-3 text-sm font-medium transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700
-                  ${location.pathname === item.path 
-                    ? 'text-primary-500 bg-primary-50 dark:bg-primary-900/20' 
+                  ${location.pathname === item.path
+                    ? 'text-primary-500 bg-primary-50 dark:bg-primary-900/20'
                     : 'text-gray-700 dark:text-gray-300'
                   }
                 `}

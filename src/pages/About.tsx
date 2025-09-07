@@ -81,11 +81,8 @@ export const About: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <Typography variant="h1" color="default" className="mb-6 text-primary-500">
-            Acerca de Cistcor
-          </Typography>
-          <Typography variant="body" color="muted" className="max-w-4xl mx-auto text-lg">
-            Impulsando el Crecimiento para Empresas en Tod Partes
+          <Typography variant="h2" color="default" className="mb-6">
+            <span className='text-primary-500'>Transformando </span>empresas con tecnología
           </Typography>
         </motion.div>
 
@@ -101,14 +98,14 @@ export const About: React.FC = () => {
               Nuestra Historia
             </Typography>
             <Typography variant="body" color="muted" className="mb-6 text-justify">
-              Somos una empresa 100% peruana, con más de 10 años de experiencia, 
-              especializada en brindar servicios tecnológicos a pequeños negocios 
-              como a grandes empresas de diferentes sectores. Nuestro personal 
+              Somos una empresa 100% peruana, con más de 10 años de experiencia,
+              especializada en brindar servicios tecnológicos a pequeños negocios
+              como a grandes empresas de diferentes sectores. Nuestro personal
               altamente capacitado está siempre innovando para brindarte las mejores soluciones.
             </Typography>
             <Typography variant="body" color="muted" className="mb-6 text-justify">
-              Más de 1000 usuarios en el Perú confían en nosotros para sus pagos 
-              y crecimiento financiero. 
+              Más de 1000 usuarios en el Perú confían en nosotros para sus pagos
+              y crecimiento financiero.
             </Typography>
             <div className="grid grid-cols-3 gap-4 mt-8">
               <div className="text-center">
@@ -126,7 +123,7 @@ export const About: React.FC = () => {
             </div>
           </div>
           <div className="relative">
-            <img 
+            <img
               src={Nosotros}
               alt="Equipo Cistcor"
               className="rounded-2xl shadow-xl"
@@ -139,7 +136,7 @@ export const About: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-40"
+          className="mb-20"
         >
           <Typography variant="h3" color="default" className="text-center mb-12">
             Nuestros Valores
@@ -167,7 +164,7 @@ export const About: React.FC = () => {
         >
           <div className="text-center mb-12">
             <Typography variant="h3" color="default" className="mb-4">
-              Nuestros Principios, <span className='text-primary-500'>Impulsados por la Innovación</span> 
+              Nuestros Principios, <span className='text-primary-500'>Impulsados por la Innovación</span>
             </Typography>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -212,9 +209,9 @@ export const About: React.FC = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 + 0.8 }}
                 className="flex justify-center p-4 rounded-lg h-24"
               >
-                <img 
-                  src={client.logo} 
-                  alt={client.name} 
+                <img
+                  src={client.logo}
+                  alt={client.name}
                   className="object-contain max-h-16"
                 />
               </motion.div>

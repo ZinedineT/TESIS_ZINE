@@ -2,6 +2,7 @@ import React from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { Header } from '../sections/Header';
 import { Footer } from '../sections/Footer';
+import { ChatbotFloat } from '../atoms/Chatbot';
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -29,6 +30,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({ children, className = ''
           {children}
         </main>
         <Footer />
+        <ChatbotFloat />
       </div>
     </div>
   );
