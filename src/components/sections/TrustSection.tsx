@@ -346,7 +346,7 @@ const TrustSection: React.FC = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   {/* Icono de comillas */}
-                  <Quote className="absolute top-4 right-4 h-8 w-8 text-primary-100 dark:text-primary-900/30" />
+                  <Quote className="absolute top-4 right-4 h-8 w-8 text-primary-400 dark:text-primary-400/60" />
                   
                   <div className="flex items-center mb-4">
                     <div className="h-12 w-12 rounded-full overflow-hidden flex-shrink-0 mr-4">

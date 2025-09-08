@@ -16,14 +16,14 @@ export function ChatbotFloat() {
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            className="fixed bottom-20 right-4 w-80 h-96 bg-white dark:bg-secondary-800 rounded-lg shadow-2xl border border-secondary-200 dark:border-secondary-700 z-50"
+            className="fixed bottom-20 right-4 w-90 h-96 bg-white dark:bg-secondary-800 rounded-lg shadow-2xl border border-secondary-200 dark:border-secondary-700 z-50"
           >
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-secondary-200 dark:border-secondary-700">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                 <span className="font-medium text-secondary-900 dark:text-white">
-                  Asistente IA
+                  Asistente Cistcor
                 </span>
               </div>
               <button

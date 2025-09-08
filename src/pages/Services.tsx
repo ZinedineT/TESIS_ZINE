@@ -1,17 +1,23 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 // import { ServicesGrid } from '../components/sections/ServicesGrid';
 import {ControlSection} from '../components/sections/ControlSection'
-import { Typography } from '../components/atoms/Typography';
-import { Button } from '../components/atoms/Button';
+// import { Typography } from '../components/atoms/Typography';
+// import { Button } from '../components/atoms/Button';
+import { WebDesignSection } from '../components/sections/WebDesignSection';
+import { CorporateEmailSection } from '../components/sections/CorporateEmailSection';
 
 export const Services: React.FC = () => {
   return (
     <div className="py-20">
       {/*ControlSection*/}
       <ControlSection/>
+      {/* Seccion Diseño */}
+      <WebDesignSection/>
+      {/* Seccion Correo */}
+      <CorporateEmailSection/>
       {/* CTA Section */}
-      <motion.section
+      {/* <motion.section
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
@@ -28,7 +34,7 @@ export const Services: React.FC = () => {
             Solicitar Cotización
           </Button>
         </div>
-      </motion.section>
+      </motion.section> */}
     </div>
   );
 };

@@ -70,7 +70,7 @@ export const ControlSection: React.FC = () => {
           className="text-center mb-16"
         >
           <Typography variant="h2" color="default" className="mb-6">
-            CON <span className="text-primary-500">CISTCORFACT</span> TU TIENES EL CONTROL...
+            CON <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-900">CISTCORFACT</span> TU TIENES EL CONTROL...
           </Typography>
           <Typography variant="body" color="muted" className="max-w-3xl mx-auto text-lg">
             Gestiona todas las áreas de tu negocio con nuestra plataforma integral diseñada para el éxito empresarial

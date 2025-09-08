@@ -1,33 +1,34 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Target, Users, Award, TrendingUp, Shield, Globe, Heart, Zap } from 'lucide-react';
+import { Target, Users, Award, TrendingUp} from 'lucide-react';
 import { Typography } from '../components/atoms/Typography';
 import { ServiceCard } from '../components/molecules/ServiceCard';
 import Nosotros from '../assets/nosotros/acerca.png';
 
 // Imágenes de ejemplo para clientes (deberás reemplazarlas con las reales)
-import VisaLogo from '../assets/brand/1.png';
+import GoogleLogo from '../assets/corp/google.png';
 import SamsungLogo from '../assets/brand/1.png';
-import EnterguLogo from '../assets/brand/1.png';
+import GodaddyLogo from '../assets/corp/godaddy.png';
 import EngeeLogo from '../assets/brand/1.png';
-import AxonLogo from '../assets/brand/1.png';
+import ZohoLogo from '../assets/corp/zoho.png';
 import CelaneseLogo from '../assets/brand/1.png';
-import { ClientTestimonials } from '../components/molecules/Testimonials';
+import { Testimonials } from '../components/molecules/Testimonials';
+import { IndustriesSection } from '../components/sections/IndustriesSection';
 
 const values = [
   {
     title: 'Misión',
-    description: 'Ofrecer soluciones tecnológicas simples y efectivas que impulsen la competitividad y productividad de los negocios.',
+    description: 'Ofrecer soluciones tecnológicas simples y efectivas.',
     icon: Target,
   },
   {
     title: 'Visión',
-    description: 'Ser líder en tecnología en el Perú, brindando soluciones innovadoras que potencien el crecimiento empresarial.',
+    description: 'Ser líder en tecnología en el Perú, brindando soluciones.',
     icon: Users,
   },
   {
     title: 'Valores',
-    description: 'Enfoque en el cliente, excelencia, innovación, trabajo en equipo y resiliencia ante los desafíos.',
+    description: 'Enfoque en el cliente, excelencia, innovación y trabajo en equipo.',
     icon: Award,
   },
   {
@@ -37,36 +38,12 @@ const values = [
   },
 ];
 
-
-const principles = [
-  {
-    title: 'Integridad',
-    description: 'Actuamos con honestidad y transparencia en todas nuestras operaciones y relaciones comerciales.',
-    icon: Heart,
-  },
-  {
-    title: 'Innovación',
-    description: 'Desarrollamos soluciones financieras avanzadas que anticipan las necesidades del mercado futuro.',
-    icon: Zap,
-  },
-  {
-    title: 'Seguridad',
-    description: 'Protegemos datos y transacciones con protocolos de seguridad de última generación.',
-    icon: Shield,
-  },
-  {
-    title: 'Alcance global',
-    description: 'Servimos a clientes en más de 24 países con soluciones adaptadas a cada mercado.',
-    icon: Globe,
-  },
-];
-
 const clients = [
-  { name: 'VISA', logo: VisaLogo },
+  { name: 'GOOGLE', logo: GoogleLogo },
   { name: 'SAMSUNG', logo: SamsungLogo },
-  { name: 'entergu', logo: EnterguLogo },
+  { name: 'GODADDY', logo: GodaddyLogo },
   { name: 'ENGEE', logo: EngeeLogo },
-  { name: 'AXON', logo: AxonLogo },
+  { name: 'ZOHO', logo: ZohoLogo },
   { name: 'Celanese', logo: CelaneseLogo },
 ];
 
@@ -141,7 +118,7 @@ export const About: React.FC = () => {
           <Typography variant="h3" color="default" className="text-center mb-12">
             Nuestros Valores
           </Typography>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 text-justify">
             {values.map((value, index) => (
               <motion.div
                 key={value.title}
@@ -150,41 +127,6 @@ export const About: React.FC = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
               >
                 <ServiceCard {...value} />
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Principles Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mb-40"
-        >
-          <div className="text-center mb-12">
-            <Typography variant="h3" color="default" className="mb-4">
-              Nuestros Principios, <span className='text-primary-500'>Impulsados por la Innovación</span>
-            </Typography>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {principles.map((principle, index) => (
-              <motion.div
-                key={principle.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 + 0.6 }}
-                className="p-6 rounded-xl shadow-md"
-              >
-                <div className="flex justify-center mb-4">
-                  <principle.icon className="h-12 w-12 text-primary-500" />
-                </div>
-                <Typography variant="h4" color="default" className="text-center mb-3">
-                  {principle.title}
-                </Typography>
-                <Typography variant="body" color="muted" className="text-center">
-                  {principle.description}
-                </Typography>
               </motion.div>
             ))}
           </div>
@@ -218,6 +160,7 @@ export const About: React.FC = () => {
             ))}
           </div>
         </motion.div>
+        <IndustriesSection/>
 
         {/* Future Vision Section */}
         <motion.div
@@ -226,7 +169,7 @@ export const About: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-center rounded-2xl p-12"
         >
-          <ClientTestimonials></ClientTestimonials>
+          <Testimonials/>
         </motion.div>
       </div>
     </div>

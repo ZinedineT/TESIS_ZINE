@@ -30,7 +30,7 @@ interface ClientTestimonialsProps {
   autoPlayInterval?: number;
 }
 
-export const ClientTestimonials: React.FC<ClientTestimonialsProps> = ({
+export const Testimonials: React.FC<ClientTestimonialsProps> = ({
   title = "Lo que dicen nuestros clientes",
   testimonials = [
     {
