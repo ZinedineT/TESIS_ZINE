@@ -104,7 +104,7 @@ export const About: React.FC = () => {
               src={Nosotros}
               alt="Equipo Cistcor"
               className="rounded-2xl shadow-xl"
-            />
+            /> 
           </div>
         </motion.div>
 
