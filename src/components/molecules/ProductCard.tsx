@@ -3,24 +3,29 @@ import { motion } from 'framer-motion';
 import { Typography } from '../atoms/Typography';
 import { Button } from '../atoms/Button';
 import { ExternalLink } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-interface ProductCardProps {
+interface Product {
+  _id: string;
   title: string;
   description: string;
-  image: string;
-  price?: string;
-  features?: string[];
+  price: number;
+  currency: string;
+  stock: number;
+  images: string[];
+  category: string;
+}
+
+interface ProductCardProps {
+  product: Product;
   className?: string;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({
-  title,
-  description,
-  image,
-  price,
-  features = [],
-  className = '',
-}) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '' }) => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <motion.div
       whileHover={{ y: -8 }}
@@ -44,48 +49,62 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     >
       <div className="aspect-video overflow-hidden">
         <img
-          src={image}
-          alt={title}
+          src={product.images[0] || 'https://via.placeholder.com/300x200'}
+          alt={product.title}
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
         />
+        {product.stock === 0 && (
+          <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded text-xs">
+            Sin stock
+          </div>
+        )}
       </div>
 
       <div className="p-6">
         <div className="flex justify-between items-start mb-3">
           <Typography variant="h5" color="default">
-            {title}
+            {product.title}
           </Typography>
-          {price && (
-            <span className="text-primary-500 font-semibold text-lg">
-              {price}
-            </span>
-          )}
+          <span className="text-primary-500 font-semibold text-lg">
+            {product.currency === 'PEN' ? 'S/ ' : '$ '}
+            {product.price.toFixed(2)}
+          </span>
         </div>
 
-        <Typography variant="body" color="muted" className="mb-4">
-          {description}
+        <Typography variant="body" color="muted" className="mb-4 line-clamp-2">
+          {product.description}
         </Typography>
 
-        {features.length > 0 && (
-          <ul className="space-y-1 mb-4">
-            {features.map((feature, index) => (
-              <li key={index} className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-primary-500 rounded-full"></span>
-                {feature}
-              </li>
-            ))}
-          </ul>
-        )}
+        <div className="flex items-center justify-between mb-4">
+          <Typography variant="caption" color={product.stock > 0 ? 'success' : 'error'}>
+            {product.stock > 0 ? `${product.stock} disponibles` : 'Sin stock'}
+          </Typography>
+          <Typography variant="caption" color="muted">
+            {product.category}
+          </Typography>
+        </div>
 
-        <Button
-          variant="outline"
-          size="sm"
-          icon={ExternalLink}
-          iconPosition="right"
-          className="w-full"
-        >
-          Ver Detalles
-        </Button>
+        <div className="flex space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            icon={ExternalLink}
+            iconPosition="right"
+            className="flex-1"
+            onClick={() => navigate(`/productos/${product._id}`)}
+          >
+            Ver Detalles
+          </Button>
+          <Button
+            variant="primary"
+            size="sm"
+            disabled={product.stock === 0 || !user}
+            className="flex-1"
+            title={!user ? 'Inicia sesión para comprar' : undefined}
+          >
+            {product.stock === 0 ? 'Sin stock' : 'Agregar'}
+          </Button>
+        </div>
       </div>
     </motion.div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { DivideIcon as LucideIcon } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -12,6 +12,7 @@ interface ButtonProps {
   iconPosition?: 'left' | 'right';
   className?: string;
   type?: 'button' | 'submit' | 'reset';
+  title?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -26,7 +27,7 @@ export const Button: React.FC<ButtonProps> = ({
   type = 'button',
 }) => {
   const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
-  
+
   const variantClasses = {
     primary: 'bg-primary-500 hover:bg-primary-600 text-white focus:ring-primary-500',
     secondary: 'bg-secondary-500 hover:bg-secondary-600 text-white focus:ring-secondary-500',
@@ -50,10 +51,10 @@ export const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
       className={`
-        ${baseClasses} 
-        ${variantClasses[variant]} 
-        ${sizeClasses[size]} 
-        ${disabled ? disabledClasses : ''} 
+        ${baseClasses}
+        ${variantClasses[variant]}
+        ${sizeClasses[size]}
+        ${disabled ? disabledClasses : ''}
         ${className}
       `}
     >

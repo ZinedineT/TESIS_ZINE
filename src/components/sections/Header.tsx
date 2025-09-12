@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Logo } from '../atoms/Logo';
 import { Navigation } from '../molecules/Navigation';
 import { ThemeToggle } from '../atoms/ThemeToggle';
+import { AuthButton } from '../molecules/AuthButton';
 
 export const Header: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ export const Header: React.FC = () => {
           {/* Actions */}
           <div className="flex items-center gap-4">
             <ThemeToggle />
+            <AuthButton />
           </div>
         </div>
       </div>
