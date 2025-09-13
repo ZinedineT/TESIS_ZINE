@@ -2,19 +2,35 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { UserMenu } from './userMenu';
+import { CartIcon } from './CartIcon';
+import { CartDrawer } from '../organisms/CartDrawer';
 
 export const AuthButton: React.FC = () => {
   const { user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   if (user) {
     return (
-      <UserMenu
-        user={user}
-        isOpen={isMenuOpen}
-        onToggle={() => setIsMenuOpen(!isMenuOpen)}
-        onLogout={logout}
-      />
+      <>
+        <div className="flex items-center gap-4">
+          {/* Icono del carrito */}
+          <CartIcon onClick={() => setIsCartOpen(true)} />
+
+          {/* Menú de usuario */}
+          <UserMenu
+            user={user}
+            isOpen={isMenuOpen}
+            onToggle={() => setIsMenuOpen(!isMenuOpen)}
+            onLogout={logout}
+          />
+        </div>
+
+        <CartDrawer
+          isOpen={isCartOpen}
+          onClose={() => setIsCartOpen(false)}
+        />
+      </>
     );
   }
 

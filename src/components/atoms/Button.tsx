@@ -8,6 +8,7 @@ interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
+  loading?: boolean;
   icon?: LucideIcon;
   iconPosition?: 'left' | 'right';
   className?: string;

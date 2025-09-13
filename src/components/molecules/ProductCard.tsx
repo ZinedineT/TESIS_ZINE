@@ -5,6 +5,7 @@ import { Button } from '../atoms/Button';
 import { ExternalLink } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../contexts/CartContext';
 
 interface Product {
   _id: string;
@@ -24,7 +25,12 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '' }) => {
   const { user } = useAuth();
+  const { addToCart } = useCart();
   const navigate = useNavigate();
+  //   const handleAddToCart = (e: React.MouseEvent) => {
+  //   e.stopPropagation();
+  //   addToCart(product._id, 1);
+  // };
 
   return (
     <motion.div
@@ -101,6 +107,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
             disabled={product.stock === 0 || !user}
             className="flex-1"
             title={!user ? 'Inicia sesión para comprar' : undefined}
+            onClick={() => {
+              if (user) {
+                addToCart(product._id, 1);
+              } else {
+                window.location.href = '/login';
+              }
+            }}
           >
             {product.stock === 0 ? 'Sin stock' : 'Agregar'}
           </Button>

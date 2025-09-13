@@ -1,5 +1,4 @@
 // src/App.tsx
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProductsProvider } from './contexts/ProductsContext';
@@ -16,11 +15,16 @@ import { Register } from './pages/Register';
 import { Profile } from './pages/Profile';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { ProtectedRoute } from './components/atoms/ProtectedRoute';
+import { CartProvider } from './contexts/CartContext';
+import { Checkout as CheckoutPage } from './pages/Checkout';
+import { OrderSuccess } from './pages/OrderSuccess';
+import { ProductDetailPage } from './pages/ProductDetailPage';
 
 function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
+        <CartProvider>
         <ProductsProvider>
         <Router>
           <PageLayout>
@@ -33,6 +37,8 @@ function App() {
               <Route path="/contacto" element={<Contact />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/order-success" element={<OrderSuccess />} />
+              <Route path="/productos/:id" element={<ProductDetailPage />} />
               <Route
                 path="/perfil"
                 element={
@@ -41,6 +47,14 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+                   <Route
+                    path="/checkout"
+                    element={
+                      <ProtectedRoute>
+                        <CheckoutPage />
+                      </ProtectedRoute>
+                    }
+                  />
               <Route
                 path="/admin/*"
                 element={
@@ -53,6 +67,7 @@ function App() {
           </PageLayout>
         </Router>
         </ProductsProvider>
+        </CartProvider>
       </AuthProvider>
     </ThemeProvider>
   );
