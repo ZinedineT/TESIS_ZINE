@@ -49,7 +49,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                 onClick={onClose}
                 className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
               >
-                <X className="h-5 w-5" />
+                <X className="h-5 w-5 text-nlack dark:text-white" />
               </button>
             </div>
 

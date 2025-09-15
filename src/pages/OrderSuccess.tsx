@@ -70,7 +70,7 @@ export const OrderSuccess: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+    <div className="min-h-screen py-8">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -79,11 +79,11 @@ export const OrderSuccess: React.FC = () => {
         >
           <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-6" />
 
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+          <h1 className="text-3xl font-bold text-black dark:text-white mb-4">
             ¡Orden Confirmada!
           </h1>
 
-          <p className="text-gray-600 dark:text-gray-400 mb-8">
+          <p className="text-black dark:text-white mb-8">
             Gracias por tu compra. Tu pedido ha sido procesado exitosamente.
           </p>
 

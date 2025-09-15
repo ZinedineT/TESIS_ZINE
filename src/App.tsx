@@ -13,12 +13,17 @@ import { Contact } from './pages/Contact';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Profile } from './pages/Profile';
-import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { ProtectedRoute } from './components/atoms/ProtectedRoute';
 import { CartProvider } from './contexts/CartContext';
 import { Checkout as CheckoutPage } from './pages/Checkout';
 import { OrderSuccess } from './pages/OrderSuccess';
 import { ProductDetailPage } from './pages/ProductDetailPage';
+import { AdminLayout } from './components/admin/AdminLayout';
+import ProductsPage from './pages/admin/ProductsPage';
+import OrdersPage from './pages/admin/OrdersPage';
+import UsersPage from './pages/admin/UsersPage';
+import StatsPage from './pages/admin/StatsPage';
+import DashboardHome from './pages/admin/DashboardHome';
 
 function App() {
   return (
@@ -55,14 +60,22 @@ function App() {
                       </ProtectedRoute>
                     }
                   />
-              <Route
-                path="/admin/*"
-                element={
-                  <ProtectedRoute adminOnly>
-                    <AdminDashboard />
-                  </ProtectedRoute>
-                }
-              />
+                  <Route
+                    path="/admin/*"
+                    element={
+                      <ProtectedRoute adminOnly>
+                        <AdminLayout /> {/* Cambia esto */}
+                      </ProtectedRoute>
+                    }
+                  >
+                    {/* Rutas hijas del admin */}
+                    <Route index element={<DashboardHome />} />
+                    <Route path="products" element={<ProductsPage />} />
+                    <Route path="orders" element={<OrdersPage />} />
+                    <Route path="users" element={<UsersPage />} />
+                    <Route path="stats" element={<StatsPage />} />
+                  </Route>
+              <Route/>
             </Routes>
           </PageLayout>
         </Router>

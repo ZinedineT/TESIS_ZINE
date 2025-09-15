@@ -85,7 +85,7 @@ export const Products: React.FC = () => {
   }
 
   return (
-    <div className="py-20 bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <div className="py-20 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -114,7 +114,7 @@ export const Products: React.FC = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: index * 0.1 + 0.3 }}
-              className="text-center p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md"
+              className="text-center p-6 rounded-lg shadow-md"
             >
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-100 dark:bg-primary-800/30 mb-4">
                 <feature.icon className="h-8 w-8 text-primary-500" />
@@ -133,7 +133,7 @@ export const Products: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-col md:flex-row gap-6 mb-12 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md"
+          className="flex flex-col md:flex-row gap-6 mb-12 p-6 rounded-lg shadow-md"
         >
           <div className="flex-1 relative min-w-[400px]">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" />
