@@ -4,7 +4,7 @@ interface TypographyProps {
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body' | 'caption' | 'overline';
   children: React.ReactNode;
   className?: string;
-  color?: 'primary' | 'secondary' | 'accent' | 'muted' | 'default' | 'success' | 'error';
+  color?: 'primary' |'success'| 'secondary' | 'accent' | 'muted' | 'default' | 'success' | 'error'|'warning';
 }
 
 export const Typography: React.FC<TypographyProps> = ({
@@ -21,6 +21,7 @@ export const Typography: React.FC<TypographyProps> = ({
     default: 'text-gray-900 dark:text-gray-100',
     success: 'text-success-500',
     error: 'text-error-500',
+    warning: 'text-warning-500',
   };
 
   const variantClasses = {

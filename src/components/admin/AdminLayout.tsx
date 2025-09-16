@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export const AdminLayout: React.FC = () => {
   return (
-    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="flex min-h-screen">
       <AdminSidebar />
       
       {/* Contenido Principal */}

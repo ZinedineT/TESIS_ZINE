@@ -25,7 +25,7 @@ export const AdminSidebar: React.FC = () => {
     <motion.div 
       initial={{ x: -20, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
-      className="w-64 bg-white dark:bg-gray-800 shadow-lg min-h-screen p-4 fixed left-0 top-0"
+      className="w-64 shadow-lg min-h-screen p-4 fixed left-0 top-0"
     >
       {/* Logo/Título */}
       <div className="mb-8 p-4">

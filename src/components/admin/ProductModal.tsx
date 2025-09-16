@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Upload as UploadIcon } from 'lucide-react';
+import { X } from 'lucide-react';
 import api from '../../services/api';
 
 interface Product {
@@ -19,7 +19,7 @@ interface ProductModalProps {
   categories: string[]
 }
 
-export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
+export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose, categories }) => {
   const [formData, setFormData] = useState<Product>({
     title: '',
     description: '',
@@ -68,7 +68,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-gray-800 text-black dark:text-white rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-600">
           <h2 className="text-xl font-semibold">
             {product ? 'Editar Producto' : 'Nuevo Producto'}
@@ -141,11 +141,11 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-transparent"
               >
                 <option value="">Seleccionar categoría</option>
-                <option value="electronics">Electrónicos</option>
-                <option value="clothing">Ropa</option>
-                <option value="books">Libros</option>
-                <option value="home">Hogar</option>
-                <option value="sports">Deportes</option>
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
