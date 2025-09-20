@@ -77,7 +77,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                       className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
                     >
                       <img
-                        src={item.productId.images[0]}
+                        src={`${import.meta.env.VITE_API_BASE_URL}${item.productId?.images[0]}`}
                         alt={item.productId.title}
                         className="w-16 h-16 object-cover rounded"
                       />

@@ -39,7 +39,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
       className={`
-        bg-white dark:bg-gradient-to-r from-gray-800 to-gray-900
+        bg-primary-200 dark:bg-gradient-to-r from-gray-800 to-gray-900
         rounded-xl
         shadow-lg
         hover:shadow-xl
@@ -55,9 +55,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
     >
       <div className="aspect-video overflow-hidden">
         <img
-          src={product.images[0] || 'https://via.placeholder.com/300x200'}
+            src={
+              product.images[0]
+                ? `${import.meta.env.VITE_API_BASE_URL}${product.images[0]}`
+                : 'https://via.placeholder.com/300x200'
+            }
           alt={product.title}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
         />
         {product.stock === 0 && (
           <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded text-xs">
@@ -68,7 +72,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
 
       <div className="p-6">
         <div className="flex justify-between items-start mb-3">
-          <Typography variant="h5" color="default">
+          <Typography variant="h5" className='line-clamp-2 min-h-[3rem]' color="default">
             {product.title}
           </Typography>
           <span className="text-primary-500 font-semibold text-lg">

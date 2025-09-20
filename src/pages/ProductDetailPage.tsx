@@ -70,7 +70,7 @@ export const ProductDetailPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Button
           variant="ghost"
-          onClick={() => navigate('/products')}
+          onClick={() => navigate('/productos')}
           className="mb-6"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
@@ -82,7 +82,11 @@ export const ProductDetailPage: React.FC = () => {
           <div className="space-y-4">
             <div className="aspect-square overflow-hidden rounded-lg">
               <img
-                src={product.images[selectedImage] || '/placeholder-image.jpg'}
+                  src={
+                    product.images[selectedImage]
+                      ? `${import.meta.env.VITE_API_BASE_URL}${product.images[selectedImage]}`
+                      : '/placeholder-image.png'
+                  }
                 alt={product.title}
                 className="w-full h-full object-cover"
               />
@@ -137,7 +141,7 @@ export const ProductDetailPage: React.FC = () => {
 
             <div>
               <Typography variant="h2" color="primary" className="text-3xl font-bold">
-                ${product.price}
+                S/{product.price}
               </Typography>
               <Typography
                 variant="body"
@@ -161,7 +165,7 @@ export const ProductDetailPage: React.FC = () => {
                   id="quantity"
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
-                  className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                  className="px-7 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
                   disabled={product.stock === 0}
                 >
                   {Array.from({ length: Math.min(product.stock, 10) }, (_, i) => i + 1).map(num => (

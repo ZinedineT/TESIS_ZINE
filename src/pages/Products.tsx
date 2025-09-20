@@ -3,32 +3,32 @@ import { motion } from 'framer-motion';
 import { Typography } from '../components/atoms/Typography';
 import { Button } from '../components/atoms/Button';
 import { Input } from '../components/atoms/Input';
-import { Zap, Shield, Users, BarChart3, Search, Filter } from 'lucide-react';
+import { Search, Filter } from 'lucide-react';
 import { ProductCard } from '../components/molecules/ProductCard';
 import { useProducts } from '../contexts/ProductsContext';
 
-const features = [
-  {
-    title: 'Rendimiento',
-    description: 'Optimizado para máxima velocidad y eficiencia',
-    icon: Zap,
-  },
-  {
-    title: 'Seguridad',
-    description: 'Protección de datos con los más altos estándares',
-    icon: Shield,
-  },
-  {
-    title: 'Escalabilidad',
-    description: 'Crece con tu empresa sin limitaciones',
-    icon: Users,
-  },
-  {
-    title: 'Analytics',
-    description: 'Insights profundos para tomar mejores decisiones',
-    icon: BarChart3,
-  },
-];
+// const features = [
+//   {
+//     title: 'Rendimiento',
+//     description: 'Optimizado para máxima velocidad y eficiencia',
+//     icon: Zap,
+//   },
+//   {
+//     title: 'Seguridad',
+//     description: 'Protección de datos con los más altos estándares',
+//     icon: Shield,
+//   },
+//   {
+//     title: 'Escalabilidad',
+//     description: 'Crece con tu empresa sin limitaciones',
+//     icon: Users,
+//   },
+//   {
+//     title: 'Analytics',
+//     description: 'Insights profundos para tomar mejores decisiones',
+//     icon: BarChart3,
+//   },
+// ];
 
 export const Products: React.FC = () => {
   const {
@@ -94,15 +94,15 @@ export const Products: React.FC = () => {
           className="text-center mb-16"
         >
           <Typography variant="h1" color="default" className="mb-6">
-            Productos y Soluciones
+            Catalogo de Productos
           </Typography>
           <Typography variant="body" color="muted" className="max-w-3xl mx-auto text-lg">
-            Descubre nuestro catálogo completo de productos diseñados para optimizar
+            Diseñados para optimizar
             y automatizar los procesos de tu empresa.
           </Typography>
         </motion.div>
 
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -127,7 +127,7 @@ export const Products: React.FC = () => {
               </Typography>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -161,7 +161,6 @@ export const Products: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-600 dark:text-gray-400">Ordenar por:</span>
             <select
               value={sortBy}
               // eslint-disable-next-line @typescript-eslint/no-explicit-any

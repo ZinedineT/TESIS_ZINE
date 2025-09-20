@@ -60,15 +60,15 @@ const Select: React.FC<SelectProps> = ({
         onChange={onChange}
         required={required}
         className={`
-          block w-full px-3 py-2 
-          border rounded-lg 
-          shadow-sm 
-          bg-white dark:bg-gray-800 
-          text-gray-900 dark:text-gray-100 
-          border-gray-300 dark:border-gray-600 
-          focus:outline-none 
-          focus:ring-2 
-          focus:ring-primary-500 
+          block w-full px-3 py-2
+          border rounded-lg
+          shadow-sm
+          bg-white dark:bg-gray-800
+          text-gray-900 dark:text-gray-100
+          border-gray-300 dark:border-gray-600
+          focus:outline-none
+          focus:ring-2
+          focus:ring-primary-500
           focus:border-primary-500
         `}
       >
@@ -290,7 +290,7 @@ export const ProductsPage: React.FC = () => {
                           <div className="flex items-center gap-3">
                             {product.images[0] && (
                               <img
-                                src={product.images[0]}
+                                src={`${import.meta.env.VITE_API_BASE_URL}${product.images[0]}`}
                                 alt={product.title}
                                 className="w-10 h-10 object-cover rounded"
                               />

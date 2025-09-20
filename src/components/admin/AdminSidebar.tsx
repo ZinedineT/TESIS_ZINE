@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  Package, 
-  Users, 
-  CreditCard, 
-  BarChart3, 
+import {
+  Package,
+  Users,
+  CreditCard,
+  BarChart3,
   Home,
-  LogOut 
+  LogOut
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -20,9 +20,14 @@ const menuItems = [
 
 export const AdminSidebar: React.FC = () => {
   const location = useLocation();
+  const onLogout = () => {
+    // Lógica para cerrar sesión
+    localStorage.removeItem('token');
+    window.location.href = '/login';
+  }
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ x: -20, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       className="w-64 shadow-lg min-h-screen p-4 fixed left-0 top-0"
@@ -39,7 +44,7 @@ export const AdminSidebar: React.FC = () => {
         {menuItems.map((item) => {
           const Icon = item.icon;
           const isActive = location.pathname === item.path;
-          
+
           return (
             <Link
               key={item.path}
@@ -59,7 +64,7 @@ export const AdminSidebar: React.FC = () => {
 
       {/* Footer/Logout */}
       <div className="absolute bottom-4 left-4 right-4">
-        <button className="flex items-center gap-3 p-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg w-full transition-colors">
+        <button onClick={onLogout} className="flex items-center gap-3 p-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg w-full transition-colors">
           <LogOut className="h-5 w-5" />
           <span className="font-medium">Cerrar Sesión</span>
         </button>
