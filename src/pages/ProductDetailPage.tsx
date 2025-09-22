@@ -82,11 +82,11 @@ export const ProductDetailPage: React.FC = () => {
           <div className="space-y-4">
             <div className="aspect-square overflow-hidden rounded-lg">
               <img
-                  src={
-                    product.images[selectedImage]
-                      ? `${import.meta.env.VITE_API_BASE_URL}${product.images[selectedImage]}`
-                      : '/placeholder-image.png'
-                  }
+                src={
+                  product.images[selectedImage]
+                    ? product.images[selectedImage]
+                    : '/placeholder-image.png'
+                }
                 alt={product.title}
                 className="w-full h-full object-cover"
               />

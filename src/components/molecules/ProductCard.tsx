@@ -55,11 +55,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
     >
       <div className="aspect-video overflow-hidden">
         <img
-            src={
-              product.images[0]
-                ? `${import.meta.env.VITE_API_BASE_URL}${product.images[0]}`
-                : 'https://via.placeholder.com/300x200'
-            }
+          src={product.images[0] || 'https://via.placeholder.com/300x200'}
           alt={product.title}
           className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
         />

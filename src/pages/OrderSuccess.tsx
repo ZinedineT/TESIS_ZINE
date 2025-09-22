@@ -84,7 +84,7 @@ export const OrderSuccess: React.FC = () => {
           </h1>
 
           <p className="text-black dark:text-white mb-8">
-            Gracias por tu compra. Tu pedido ha sido procesado exitosamente.
+            Gracias por tu compra. Tu pedido ha sido procesado.
           </p>
 
           {order && (
@@ -101,17 +101,17 @@ export const OrderSuccess: React.FC = () => {
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <Package className="h-5 w-5 text-blue-500 flex-shrink-0" />
-                  <span className="text-sm">Orden #: {order._id?.substring(0, 8).toUpperCase()}</span>
+                  <span className="text-sm text-black dark:text-white">Orden #: {order._id?.substring(0, 8).toUpperCase()}</span>
                 </div>
 
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-blue-500 flex-shrink-0" />
-                  <span className="text-sm">Email: {order.customerEmail || 'N/A'}</span>
+                  <span className="text-sm text-black dark:text-white">Email: {order.customerEmail || 'N/A'}</span>
                 </div>
 
                 <div className="flex items-center gap-3">
                   <Clock className="h-5 w-5 text-blue-500 flex-shrink-0" />
-                  <span className="text-sm">
+                  <span className="text-sm text-black dark:text-white">
                     Fecha: {new Date(order.createdAt).toLocaleDateString('es-PE')}
                   </span>
                 </div>

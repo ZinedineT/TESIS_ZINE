@@ -203,7 +203,11 @@ export const Checkout: React.FC = () => {
                 {cart.items.map((item) => (
                   <div key={item._id} className="flex items-center gap-4">
                     <img
-                      src={item.productId.images[0] || '/placeholder-image.jpg'}
+                      src={
+                        item.productId?.images?.[0]  
+                          ? item.productId.images[0]
+                          : '/placeholder-image.jpg'
+                      }
                       alt={item.productId.title}
                       className="w-16 h-16 object-cover rounded"
                     />

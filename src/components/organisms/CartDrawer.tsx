@@ -77,14 +77,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                       className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
                     >
                       <img
-                        src={`${import.meta.env.VITE_API_BASE_URL}${item.productId?.images[0]}`}
-                        alt={item.productId.title}
+                        src={item.productId?.images?.[0]}
+                        alt={item.productId?.title || 'Producto'}
                         className="w-16 h-16 object-cover rounded"
                       />
 
                       <div className="flex-1">
                         <h3 className="font-medium text-gray-900 dark:text-white text-sm">
-                          {item.productId.title}
+                          {item.productId?.title || 'Sin título'}
                         </h3>
                         <p className="text-primary-600 dark:text-primary-400 font-semibold">
                           S/ {item.priceAtMoment.toFixed(2)}
@@ -93,7 +93,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
 
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => updateQuantity(item.productId._id, item.quantity - 1)}
+                          onClick={() => item.productId && updateQuantity(item.productId._id, item.quantity - 1)}
                           className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded"
                         >
                           <Minus className="h-3 w-3" />

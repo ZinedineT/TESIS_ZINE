@@ -290,7 +290,7 @@ export const ProductsPage: React.FC = () => {
                           <div className="flex items-center gap-3">
                             {product.images[0] && (
                               <img
-                                src={`${import.meta.env.VITE_API_BASE_URL}${product.images[0]}`}
+                                src={product.images[0]}
                                 alt={product.title}
                                 className="w-10 h-10 object-cover rounded"
                               />
