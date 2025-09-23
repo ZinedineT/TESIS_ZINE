@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect, useCallback, Rea
 import { debounce } from 'lodash';
 import { productsAPI } from '../services/api';
 
-interface Product {
+export interface Product {
   _id: string;
   title: string;
   description: string;
