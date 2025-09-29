@@ -3,6 +3,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { Header } from '../sections/Header';
 import { Footer } from '../sections/Footer';
 import { ChatbotFloat } from '../atoms/Chatbot';
+import { useLocation } from 'react-router-dom';
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,8 @@ interface PageLayoutProps {
 
 export const PageLayout: React.FC<PageLayoutProps> = ({ children, className = '' }) => {
   const { theme } = useTheme();
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
 
   return (
     <div className={`min-h-screen w-full relative ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
@@ -29,7 +32,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({ children, className = ''
         <main className={`flex-1 ${className}`}>
           {children}
         </main>
-        <Footer />
+        {!isAdmin && <Footer />} 
         <ChatbotFloat />
       </div>
     </div>

@@ -1,9 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { BarChart3, TrendingUp, Users, Package, CreditCard, DollarSign } from 'lucide-react';
+import { TrendingUp, Users, Package, CreditCard, DollarSign } from 'lucide-react';
 import { Typography } from '../../components/atoms/Typography';
 import api from '../../services/api';
 import { getStatusColor, getStatusIcon } from '../../components/utils/statusUtils';
+import {
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer
+} from 'recharts';
 
 interface DashboardStats {
   totalUsers: number;
@@ -29,6 +44,38 @@ interface SelectProps {
   options: { value: string; label: string }[];
   placeholder?: string;
   className?: string;
+}
+// Nuevas interfaces para los datos de gráficos
+interface ChartData {
+  _id: string;
+  revenue?: number;
+  orders?: number;
+  count?: number;
+}
+
+interface TopProduct {
+  _id: string;
+  totalSold: number;
+  revenue: number;
+  product: {
+    title: string;
+    images: string[];
+  };
+}
+
+interface DashboardCharts {
+  revenueData: ChartData[];
+  ordersByStatus: ChartData[];
+  userTrend: ChartData[];
+  topProducts: TopProduct[];
+}
+
+interface DashboardResponse {
+  stats: DashboardStats;
+  charts: DashboardCharts;
+  recentOrders: RecentOrder[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  lowStockProducts: any[];
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -74,6 +121,7 @@ const Select: React.FC<SelectProps> = ({
 
 export const StatsPage: React.FC = () => {
   const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [charts, setCharts] = useState<DashboardCharts | null>(null);
   const [recentOrders, setRecentOrders] = useState<RecentOrder[]>([]);
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState('month');
@@ -85,14 +133,45 @@ export const StatsPage: React.FC = () => {
   const fetchStats = async () => {
     try {
       setLoading(true);
-      const response = await api.get(`/admin/stats?range=${timeRange}`);
+      const response = await api.get<DashboardResponse>(`/admin/stats?range=${timeRange}`);
       setStats(response.data.stats);
+      setCharts(response.data.charts);
       setRecentOrders(response.data.recentOrders || []);
     } catch (error) {
       console.error('Error fetching stats:', error);
     } finally {
       setLoading(false);
     }
+  };
+    // Colores para gráficos
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
+  
+  const statusColors: { [key: string]: string } = {
+    paid: '#00C49F',
+    pending: '#FFBB28',
+    failed: '#FF8042',
+    refunded: '#8884D8'
+  };
+    // Formatear datos para gráfico de estados de orden
+  const getOrdersByStatusData = () => {
+    if (!charts?.ordersByStatus) return [];
+    return charts.ordersByStatus.map(item => ({
+      name: item._id,
+      value: item.count,
+      color: statusColors[item._id] || COLORS[0]
+    }));
+  };
+
+  // Formatear datos para productos más vendidos
+  const getTopProductsData = () => {
+    if (!charts?.topProducts) return [];
+    return charts.topProducts.map(item => ({
+      name: item.product.title.length > 15 
+        ? item.product.title.substring(0, 15) + '...' 
+        : item.product.title,
+      ventas: item.totalSold,
+      ingresos: item.revenue
+    }));
   };
 
   if (loading) {
@@ -175,13 +254,13 @@ export const StatsPage: React.FC = () => {
         </motion.div>
 
         {/* Gráficos y Detalles */}
-        <motion.div
+<motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="grid grid-cols-1 lg:grid-cols-2 gap-6"
         >
-          {/* Gráfico de Ingresos (Placeholder) */}
+          {/* Gráfico de Ingresos */}
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
             <div className="flex items-center justify-between mb-6">
               <Typography variant="h2" color="default">
@@ -189,16 +268,149 @@ export const StatsPage: React.FC = () => {
               </Typography>
               <TrendingUp className="h-5 w-5 text-success-500" />
             </div>
-            <div className="h-64 flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded-lg">
-              <div className="text-center text-gray-500 dark:text-gray-400">
-                <BarChart3 className="h-12 w-12 mx-auto mb-2" />
-                <Typography variant="body" color="muted">
-                  Gráfico de ingresos
-                </Typography>
-                <Typography variant="caption" color="muted">
-                  (Se integrará con Chart.js o Recharts)
-                </Typography>
-              </div>
+            <div className="h-64">
+              {charts?.revenueData && charts.revenueData.length > 0 ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={charts.revenueData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis 
+                      dataKey="_id" 
+                      tick={{ fontSize: 12 }}
+                    />
+                    <YAxis tick={{ fontSize: 12 }} />
+                    <Tooltip 
+                      formatter={(value) => [`S/. ${Number(value).toFixed(2)}`, 'Ingresos']}
+                    />
+                    <Legend />
+                    <Line 
+                      type="monotone" 
+                      dataKey="revenue" 
+                      stroke="#0088FE" 
+                      strokeWidth={2}
+                      name="Ingresos"
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              ) : (
+                <div className="h-full flex items-center justify-center text-gray-500 dark:text-gray-400">
+                  <Typography variant="body" color="muted">
+                    No hay datos de ingresos para el período seleccionado
+                  </Typography>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Órdenes por Estado */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
+            <Typography variant="h2" color="default" className="mb-6">
+              Órdenes por Estado
+            </Typography>
+            <div className="h-64">
+              {getOrdersByStatusData().length > 0 ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={getOrdersByStatusData()}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      label={({ name, value }) => `${name}: ${value}`}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="value"
+                    >
+                      {getOrdersByStatusData().map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend />
+                  </PieChart>
+                </ResponsiveContainer>
+              ) : (
+                <div className="h-full flex items-center justify-center text-gray-500 dark:text-gray-400">
+                  <Typography variant="body" color="muted">
+                    No hay datos de órdenes
+                  </Typography>
+                </div>
+              )}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Métricas Adicionales - ACTUALIZADO */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+        >
+          {/* Productos Más Vendidos */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
+            <Typography variant="h3" color="default" className="mb-4">
+              Productos Más Vendidos
+            </Typography>
+            <div className="h-64">
+              {getTopProductsData().length > 0 ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={getTopProductsData()}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} />
+                    <YAxis />
+                    <Tooltip 
+                      formatter={(value, name) => {
+                        if (name === 'ingresos') return [`S/. ${Number(value).toFixed(2)}`, 'Ingresos'];
+                        return [value, 'Ventas'];
+                      }}
+                    />
+                    <Legend />
+                    <Bar dataKey="ventas" fill="#8884d8" name="Unidades Vendidas" />
+                    <Bar dataKey="ingresos" fill="#82ca9d" name="Ingresos (S/.)" />
+                  </BarChart>
+                </ResponsiveContainer>
+              ) : (
+                <div className="h-full flex items-center justify-center text-gray-500 dark:text-gray-400">
+                  <Package className="h-12 w-12 mx-auto mb-2" />
+                  <Typography variant="body" color="muted">
+                    No hay datos de productos vendidos
+                  </Typography>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Tendencia de Usuarios */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
+            <Typography variant="h3" color="default" className="mb-4">
+              Tendencia de Usuarios
+            </Typography>
+            <div className="h-64">
+              {charts?.userTrend && charts.userTrend.length > 0 ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={charts.userTrend}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="_id" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line 
+                      type="monotone" 
+                      dataKey="count" 
+                      stroke="#00C49F" 
+                      strokeWidth={2}
+                      name="Nuevos Usuarios"
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              ) : (
+                <div className="h-full flex items-center justify-center text-gray-500 dark:text-gray-400">
+                  <Users className="h-12 w-12 mx-auto mb-2" />
+                  <Typography variant="body" color="muted">
+                    No hay datos de tendencia de usuarios
+                  </Typography>
+                </div>
+              )}
             </div>
           </div>
 
@@ -226,43 +438,6 @@ export const StatsPage: React.FC = () => {
                   </Typography>
                 </div>
               )}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Métricas Adicionales */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
-        >
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
-            <Typography variant="h3" color="default" className="mb-4">
-              Productos Más Vendidos
-            </Typography>
-            <div className="text-center text-gray-500 dark:text-gray-400 py-8">
-              <Package className="h-12 w-12 mx-auto mb-2" />
-              <Typography variant="body" color="muted">
-                Análisis de productos populares
-              </Typography>
-              <Typography variant="caption" color="muted">
-                (Próximamente)
-              </Typography>
-            </div>
-          </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
-            <Typography variant="h3" color="default" className="mb-4">
-              Tendencia de Usuarios
-            </Typography>
-            <div className="text-center text-gray-500 dark:text-gray-400 py-8">
-              <Users className="h-12 w-12 mx-auto mb-2" />
-              <Typography variant="body" color="muted">
-                Gráfico de crecimiento de usuarios
-              </Typography>
-              <Typography variant="caption" color="muted">
-                (Próximamente)
-              </Typography>
             </div>
           </div>
         </motion.div>
