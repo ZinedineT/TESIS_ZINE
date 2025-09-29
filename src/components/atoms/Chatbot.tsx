@@ -24,17 +24,17 @@ export function ChatbotFloat() {
     setMessages(prev => [...prev, userMsg]);
     setMessage('');
     setLoading(true);
-
+  const CHATBOT_URL = import.meta.env.VITE_CHATBOT_URL
     try {
-      const res = await fetch('http://localhost:5000/api/chat', {
+      const res = await fetch(CHATBOT_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           message,
-          userId: 'frontend-user-1', // Puedes generar un UUID
-          model: 'google/gemma-3-12b-it' // Opcional
+          userId: 'frontend-user-1', 
+          model: 'google/gemma-3-12b-it' 
         }),
       });
 

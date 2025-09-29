@@ -1,5 +1,4 @@
 // src/api/authApi.ts
-const API_BASE_URL = 'http://localhost:5001/api';
 
 const apiClient = {
   async request(endpoint: string, options: RequestInit = {}) {
@@ -10,7 +9,7 @@ const apiClient = {
       ...options.headers,
     };
 
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}${endpoint}`, {
       ...options,
       headers,
     });
