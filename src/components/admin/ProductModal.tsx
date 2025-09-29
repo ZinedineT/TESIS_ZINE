@@ -37,17 +37,28 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose, ca
     }
   }, [product]);
 
+  const [files, setFiles] = useState<File[]>([]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      const fd = new FormData();
+      Object.entries(formData).forEach(([key, value]) =>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        fd.append(key, value as any)
+      );
+      files.forEach(f => fd.append('images', f));
+
       if (product?._id) {
-        await api.put(`/admin/products/${product._id}`, formData);
-        alert('Producto actualizado exitosamente');
+        await api.put(`/admin/products/${product._id}`, fd, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        });
       } else {
-        await api.post('/admin/products', formData);
-        alert('Producto creado exitosamente');
+        await api.post('/admin/products', fd, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        });
       }
       onClose();
     } catch (error) {
@@ -138,7 +149,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose, ca
                 value={formData.category}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700"
               >
                 <option value="">Seleccionar categoría</option>
                 {categories.map((category) => (
@@ -151,17 +162,14 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose, ca
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">Imágenes (URLs separadas por coma)</label>
-            <input
-              type="text"
-              value={formData.images.join(', ')}
-              onChange={(e) => setFormData(prev => ({
-                ...prev,
-                images: e.target.value.split(',').map(url => url.trim()).filter(Boolean)
-              }))}
-              placeholder="https://ejemplo.com/imagen1.jpg, https://ejemplo.com/imagen2.jpg"
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-transparent"
-            />
+            <label className="block text-sm font-medium mb-2">Selecciona tu imágen</label>
+              <input
+                type="file"
+                multiple
+                accept="image/*"
+                onChange={(e) => setFiles(Array.from(e.target.files || []))}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-transparent"
+              />
           </div>
 
           <div className="flex justify-end gap-3 pt-4">
