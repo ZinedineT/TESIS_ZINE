@@ -7,7 +7,7 @@ import Nosotros from '../assets/nosotros/acerca.png';
 
 // Imágenes de ejemplo para clientes (deberás reemplazarlas con las reales)
 import GoogleLogo from '../assets/corp/google.png';
-import SamsungLogo from '../assets/brand/1.png';
+import AwsLogo from '../assets/corp/aws.png';
 import GodaddyLogo from '../assets/corp/godaddy.png';
 import EngeeLogo from '../assets/brand/1.png';
 import ZohoLogo from '../assets/corp/zoho.png';
@@ -40,7 +40,7 @@ const values = [
 
 const clients = [
   { name: 'GOOGLE', logo: GoogleLogo },
-  { name: 'SAMSUNG', logo: SamsungLogo },
+  { name: 'AWS', logo: AwsLogo },
   { name: 'GODADDY', logo: GodaddyLogo },
   { name: 'ENGEE', logo: EngeeLogo },
   { name: 'ZOHO', logo: ZohoLogo },

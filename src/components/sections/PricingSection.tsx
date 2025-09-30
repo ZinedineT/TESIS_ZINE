@@ -194,7 +194,7 @@ const PricingSection: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <Typography variant="h2" className="text-primary mb-4">
-              Impulsa tu Mype con tu plan de <br /> Cistcor Facturación Electrónica
+              <span className='text-primary-600'>Impulsa tu Mype con los mejores planes<br /> que Cistcor te ofrece</span>
             </Typography>
             <Typography variant="body" className="text-primary mb-2">
               Prueba hoy mismo el plan que se adapta a tus necesidades.

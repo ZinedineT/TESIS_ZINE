@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Package, Users, CreditCard, BarChart3 } from 'lucide-react';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 export const AdminDashboard: React.FC = () => {
   return (

@@ -44,22 +44,20 @@ export const DashboardHome: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Typography variant="body" color="muted">
-          Cargando...
-        </Typography>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="py-4 lg:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="space-y-6"
       >
-        <Typography variant="h1" color="default" className="mb-6">
+        <Typography variant="h1" color="default" className="mb-4 text-2xl lg:text-3xl text-center lg:text-left">
           Panel de Administración
         </Typography>
 
@@ -68,7 +66,7 @@ export const DashboardHome: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6"
         >
           <MetricCard
             icon={Users}
@@ -105,9 +103,9 @@ export const DashboardHome: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6"
+          className="rounded-lg shadow-md p-4 lg:p-6"
         >
-          <Typography variant="h2" color="default" className="mb-4">
+          <Typography variant="h2" color="default" className="mb-4 text-xl lg:text-2xl">
             Órdenes Recientes
           </Typography>
           <div className="space-y-3">
@@ -121,6 +119,11 @@ export const DashboardHome: React.FC = () => {
                 <OrderItem order={order} />
               </motion.div>
             ))}
+            {recentOrders.length === 0 && (
+              <Typography variant="body" color="muted" className="text-center py-8">
+                No hay órdenes recientes
+              </Typography>
+            )}
           </div>
         </motion.div>
       </motion.div>
@@ -128,7 +131,7 @@ export const DashboardHome: React.FC = () => {
   );
 };
 
-// Componente de Tarjeta de Métrica
+// Componente de Tarjeta de Métrica (Responsive)
 const MetricCard: React.FC<{
   icon: React.ComponentType<{ className?: string }>;
   title: string;
@@ -146,49 +149,50 @@ const MetricCard: React.FC<{
   return (
     <motion.div
       whileHover={{ y: -2 }}
-      className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md"
+      className="rounded-lg p-4 lg:p-6 shadow-md"
     >
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-3 lg:mb-4">
         <div className={`p-2 rounded-full ${colorClasses[color]}`}>
-          <Icon className="h-6 w-6" />
+          <Icon className="h-5 w-5 lg:h-6 lg:w-6" />
         </div>
-        <Typography variant="caption" color="success" className="flex items-center">
-          <TrendingUp className="h-4 w-4 mr-1" />
+        <Typography variant="caption" color="success" className="flex items-center text-xs lg:text-sm">
+          <TrendingUp className="h-3 w-3 lg:h-4 lg:w-4 mr-1" />
           {trend}
         </Typography>
       </div>
-      <Typography variant="h3" color="default" className="mb-1">
+      <Typography variant="h3" color="default" className="mb-1 text-lg lg:text-xl">
         {value}
       </Typography>
-      <Typography variant="body" color="muted">
+      <Typography variant="body" color="muted" className="text-sm lg:text-base">
         {title}
       </Typography>
     </motion.div>
   );
 };
 
-// Componente de Item de Orden
+// Componente de Item de Orden (Responsive)
 const OrderItem: React.FC<{ order: RecentOrder }> = ({ order }) => {
   return (
-    <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-600">
-      <div>
-        <Typography variant="h6" color="default">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 border-b border-gray-200 dark:border-gray-600 gap-2 sm:gap-0">
+      <div className="flex-1">
+        <Typography variant="h6" color="default" className="text-sm lg:text-base">
           #{order._id.slice(-6)}
         </Typography>
-        <Typography variant="caption" color="muted">
+        <Typography variant="caption" color="muted" className="text-xs lg:text-sm break-all">
           {order.customerEmail}
         </Typography>
       </div>
-      <div className="text-right">
-        <Typography variant="h6" color="default">
+      <div className="flex items-center justify-between sm:justify-end gap-4 sm:gap-6">
+        <Typography variant="h6" color="default" className="text-sm lg:text-base whitespace-nowrap">
           S/. {order.total.toFixed(2)}
         </Typography>
-        <div className="flex items-center gap-2 justify-end">
+        <div className="flex items-center gap-2">
           {getStatusIcon(order.paymentStatus)}
           <span className={`text-xs px-2 py-1 rounded-full ${getStatusColor(order.paymentStatus)}`}>
             <Typography
               variant="caption"
               color={order.paymentStatus === 'paid' ? 'success' : order.paymentStatus === 'pending' ? 'warning' : 'error'}
+              className="text-xs"
             >
               {order.paymentStatus}
             </Typography>

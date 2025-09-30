@@ -51,10 +51,10 @@ const FloatingSoftware: React.FC<{
   isActive: boolean;
 }> = ({ image, position, isActive }) => {
   const positionClasses = {
-    right: 'lg:right-10 lg:top-10 right-4 top-4',
-    left: 'lg:left-10 lg:top-10 left-4 top-4',
-    'right-bottom': 'lg:right-10 lg:bottom-10 right-4 bottom-4',
-    'left-bottom': 'lg:left-10 lg:bottom-10 left-4 bottom-4',
+    right: 'lg:right-10 lg:top-10 right-2 top-2 md:right-4 md:top-4',
+    left: 'lg:left-10 lg:top-10 left-2 top-2 md:left-4 md:top-4',
+    'right-bottom': 'lg:right-10 lg:bottom-10 right-2 bottom-2 md:right-4 md:bottom-4',
+    'left-bottom': 'lg:left-10 lg:bottom-10 left-2 bottom-2 md:left-4 md:bottom-4',
   };
 
   return (
@@ -70,19 +70,19 @@ const FloatingSoftware: React.FC<{
       whileHover={{ scale: 1.05 }}
     >
       <div className="relative">
-        <div className="absolute -inset-4 bg-primary-500/20 rounded-2xl blur-lg -z-10 animate-pulse"></div>
+        <div className="absolute -inset-2 md:-inset-4 bg-primary-500/20 rounded-xl md:rounded-2xl blur-lg -z-10 animate-pulse"></div>
         <img 
           src={image} 
           alt="Interfaz de software" 
-          className="w-40 lg:w-56 h-auto rounded-xl shadow-2xl border-2 border-white/20"
+          className="w-24 h-16 md:w-40 md:h-28 lg:w-56 lg:h-40 object-cover rounded-lg md:rounded-xl shadow-xl border-2 border-white/20"
         />
         
         {/* Efecto de brillo/reflejo */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-xl pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-lg md:rounded-xl pointer-events-none"></div>
         
-        {/* Indicador de animación (puntos pulsantes) */}
+        {/* Indicador de animación (puntos pulsantes) - Solo en desktop */}
         <motion.div
-          className="absolute -top-2 -right-2 w-4 h-4 bg-success-500 rounded-full"
+          className="hidden md:block absolute -top-1 -right-1 md:-top-2 md:-right-2 w-3 h-3 md:w-4 md:h-4 bg-success-500 rounded-full"
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         />
@@ -102,55 +102,74 @@ export const HeroSection: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative py-20 lg:py-32 overflow-hidden">
+    <section className="relative py-12 md:py-20 lg:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Contenido de texto (izquierda) */}
-          <div className="text-left">
-            {slides.map((slide, index) => (
-              index === currentSlide && (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -30 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <motion.div className="mb-8">
-                    <Typography variant="h2" color="secondary" className="mb-2">
-                      {slide.title1}
-                    </Typography>
-                    <Typography variant="h1" color="primary" className="mb-4">
-                      {slide.title2}
-                    </Typography>
-                    <Typography variant="body" color="muted" className="max-w-md text-lg">
-                      {slide.subtitle}
-                    </Typography>
-                  </motion.div>
-
-                  <motion.div className="flex flex-col sm:flex-row gap-4">
-                    <a href={slide.buttonLink}>
-                      <Button
-                        variant="primary"
-                        size="lg"
-                        icon={ArrowRight}
-                        iconPosition="right"
+          <div className="text-center lg:text-left order-2 lg:order-1">
+            <AnimatePresence mode="wait">
+              {slides.map((slide, index) => (
+                index === currentSlide && (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -30 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <motion.div className="mb-6 md:mb-8">
+                      <Typography 
+                        variant="h2" 
+                        color="secondary" 
+                        className="mb-2 text-2xl md:text-3xl lg:text-4xl"
                       >
-                        {slide.buttonText}
+                        {slide.title1}
+                      </Typography>
+                      <Typography 
+                        variant="h1" 
+                        color="primary" 
+                        className="mb-4 text-3xl md:text-4xl lg:text-5xl font-bold"
+                      >
+                        {slide.title2}
+                      </Typography>
+                      <Typography 
+                        variant="body" 
+                        color="muted" 
+                        className="max-w-md mx-auto lg:mx-0 text-base md:text-lg leading-relaxed"
+                      >
+                        {slide.subtitle}
+                      </Typography>
+                    </motion.div>
+
+                    <motion.div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
+                      <a href={slide.buttonLink} className="flex justify-center lg:justify-start">
+                        <Button
+                          variant="primary"
+                          size="lg"
+                          icon={ArrowRight}
+                          iconPosition="right"
+                          className="w-full sm:w-auto"
+                        >
+                          {slide.buttonText}
+                        </Button>
+                      </a>
+                      <Button 
+                        variant="outline" 
+                        size="lg"
+                        className="w-full sm:w-auto"
+                      >
+                        Ver Productos
                       </Button>
-                    </a>
-                    <Button variant="outline" size="lg">
-                      Ver Productos
-                    </Button>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              )
-            ))}
+                )
+              ))}
+            </AnimatePresence>
           </div>
 
           {/* Imagen del slider (derecha) */}
-          <div className="relative w-full h-96 lg:h-[500px] flex items-center justify-center overflow-hidden rounded-lg">
-            <AnimatePresence>
+          <div className="relative w-full h-64 md:h-80 lg:h-[500px] flex items-center justify-center overflow-hidden rounded-xl md:rounded-2xl order-1 lg:order-2">
+            <AnimatePresence mode="wait">
               {slides.map((slide, index) => (
                 index === currentSlide && (
                   <motion.div
@@ -164,10 +183,10 @@ export const HeroSection: React.FC = () => {
                     <img 
                       src={slide.image} 
                       alt={`Slide ${index + 1}`} 
-                      className="max-h-full max-w-full object-contain rounded-lg"
+                      className="w-full h-full object-cover md:object-contain rounded-xl md:rounded-2xl"
                     />
                     
-                    {/* Imagen flotante de software para todos los slides que tengan softwareImage */}
+                    {/* Imagen flotante de software */}
                     {slide.softwareImage && slide.softwarePosition && (
                       <FloatingSoftware 
                         image={slide.softwareImage} 
@@ -183,18 +202,25 @@ export const HeroSection: React.FC = () => {
         </div>
 
         {/* Indicadores del slider */}
-        <div className="mt-8 flex justify-center gap-2">
+        <div className="mt-6 md:mt-8 flex justify-center gap-2">
           {slides.map((_, index) => (
             <button
               key={index}
-              className={`w-3 h-3 rounded-full ${
-                index === currentSlide ? 'bg-primary-500' : 'bg-primary-300 dark:bg-primary-700'
+              className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
+                index === currentSlide 
+                  ? 'bg-primary-500 scale-125' 
+                  : 'bg-primary-300 dark:bg-primary-700 hover:bg-primary-400'
               }`}
               onClick={() => setCurrentSlide(index)}
+              aria-label={`Ir al slide ${index + 1}`}
             />
           ))}
         </div>
       </div>
+
+      {/* Efectos de fondo decorativos */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-primary-500/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-secondary-500/10 rounded-full translate-x-1/2 translate-y-1/2 blur-3xl"></div>
     </section>
   );
 };

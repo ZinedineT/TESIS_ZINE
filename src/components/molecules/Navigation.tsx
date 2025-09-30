@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
@@ -11,68 +10,66 @@ const navItems = [
   { path: '/contacto', label: 'Contacto' },
 ];
 
-export const Navigation: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface NavigationProps {
+  mobile?: boolean;
+  onItemClick?: () => void;
+}
+
+export const Navigation: React.FC<NavigationProps> = ({ mobile = false, onItemClick }) => {
   const location = useLocation();
 
-  return (
-    <>
-      {/* Desktop Navigation */}
-      <nav className="hidden md:flex items-center space-x-8">
-        {navItems.map((item) => (
-          <Link
+  if (mobile) {
+    return (
+      <nav className="flex flex-col space-y-1">
+        {navItems.map((item, index) => (
+          <motion.div
             key={item.path}
-            to={item.path}
-            className={`
-              text-base font-medium transition-colors duration-200 hover:text-primary-500
-              ${location.pathname === item.path
-                ? 'text-primary-500'
-                : 'text-gray-700 dark:text-gray-300'
-              }
-            `}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.1 }}
           >
-            {item.label}
-          </Link>
+            <Link
+              to={item.path}
+              onClick={onItemClick}
+              className={`
+                block px-4 py-3 text-base font-medium transition-all duration-200 rounded-lg
+                ${location.pathname === item.path
+                  ? 'text-primary-500 bg-primary-50 dark:bg-primary-900/20 border-l-4 border-primary-500'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                }
+              `}
+            >
+              {item.label}
+            </Link>
+          </motion.div>
         ))}
       </nav>
+    );
+  }
 
-      {/* Mobile Navigation Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-        aria-label="Toggle navigation"
-      >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
-
-      {/* Mobile Navigation Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="absolute top-full left-0 right-0 mt-2 mx-4 md:hidden bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
+  return (
+    <nav className="flex items-center justify-center space-x-8">
+      {navItems.map((item) => (
+        <Link
+          key={item.path}
+          to={item.path}
+          className={`
+            text-base font-medium transition-all duration-200 relative
+            ${location.pathname === item.path
+              ? 'text-primary-500'
+              : 'text-gray-700 dark:text-gray-300 hover:text-primary-500'
+            }
+          `}
         >
-          <nav className="py-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setIsOpen(false)}
-                className={`
-                  block px-4 py-3 text-sm font-medium transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700
-                  ${location.pathname === item.path
-                    ? 'text-primary-500 bg-primary-50 dark:bg-primary-900/20'
-                    : 'text-gray-700 dark:text-gray-300'
-                  }
-                `}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </motion.div>
-      )}
-    </>
+          {item.label}
+          {location.pathname === item.path && (
+            <motion.div
+              className="absolute -bottom-2 left-0 right-0 h-0.5 bg-primary-500"
+              layoutId="activeNavIndicator"
+            />
+          )}
+        </Link>
+      ))}
+    </nav>
   );
 };

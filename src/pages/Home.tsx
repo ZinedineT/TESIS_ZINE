@@ -2,8 +2,6 @@ import React from 'react';
 import { HeroSection } from '../components/sections/HeroSection';
 import { ServicesGrid } from '../components/sections/ServicesGrid';
 import FunctionalitySection from '../components/sections/FunctionalitySection';
-// import { ProductsShowcase } from '../components/sections/ProductsShowcase';
-// import { BlogGrid } from '../components/sections/BlogGrid';
 import TrustSection  from '../components/sections/TrustSection';
 import PricingSection from '../components/sections/PricingSection';
 
@@ -15,8 +13,6 @@ export const Home: React.FC = () => {
       <FunctionalitySection/>
       <PricingSection/>
       <TrustSection/>
-      {/* <ProductsShowcase /> */}
-      {/* <BlogGrid /> */}
     </>
   );
 };

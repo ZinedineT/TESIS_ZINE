@@ -7,6 +7,7 @@ interface UserMenuProps {
   isOpen: boolean;
   onToggle: () => void;
   onLogout: () => void;
+  mobile?: boolean;
 }
 
 export const UserMenu: React.FC<UserMenuProps> = ({ user, isOpen, onToggle, onLogout }) => {
