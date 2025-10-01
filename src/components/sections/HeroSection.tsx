@@ -217,10 +217,6 @@ export const HeroSection: React.FC = () => {
           ))}
         </div>
       </div>
-
-      {/* Efectos de fondo decorativos */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-primary-500/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-secondary-500/10 rounded-full translate-x-1/2 translate-y-1/2 blur-3xl"></div>
     </section>
   );
 };

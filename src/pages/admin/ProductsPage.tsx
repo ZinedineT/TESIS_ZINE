@@ -60,7 +60,7 @@ const Select: React.FC<SelectProps> = ({
         onChange={onChange}
         required={required}
         className={`
-          block w-full px-3 py-2 text-sm lg:text-base
+          block w-full px-3 py-2 text-sm
           border rounded-lg
           shadow-sm
           bg-white dark:bg-gray-800
@@ -165,20 +165,20 @@ export const ProductsPage: React.FC = () => {
   };
 
   return (
-    <div className="py-4 lg:py-8 min-h-screen w-full overflow-x-hidden">
+    <div className="min-h-screen w-full">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="space-y-6 w-full max-w-7xl mx-auto px-2 sm:px-4 lg:px-8"
+        className="w-full max-w-full px-3 sm:px-4 py-4 mx-auto"
       >
         {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <Typography variant="h1" color="default" className="mb-2 text-xl lg:text-2xl">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
+          <div className="flex-1 min-w-0">
+            <Typography variant="h1" color="default" className="text-xl sm:text-2xl mb-2">
               Productos
             </Typography>
-            <Typography variant="body" color="muted" className="text-sm lg:text-base">
+            <Typography variant="body" color="muted" className="text-sm sm:text-base">
               Gestiona tu inventario de productos ({pagination?.totalProducts || 0} total)
             </Typography>
           </div>
@@ -188,7 +188,7 @@ export const ProductsPage: React.FC = () => {
             icon={Plus}
             iconPosition="left"
             onClick={() => setIsModalOpen(true)}
-            className="w-full sm:w-auto min-w-[100px]"
+            className="w-full sm:w-auto min-w-[140px] mt-2 sm:mt-0"
           >
             <span className="hidden sm:inline">Nuevo Producto</span>
             <span className="sm:hidden">Nuevo</span>
@@ -200,36 +200,40 @@ export const ProductsPage: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="rounded-lg p-4 lg:p-6 shadow-md"
+          className="rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700 w-full mb-6"
         >
-          <form onSubmit={handleSearch} className="flex flex-col lg:flex-row items-stretch lg:items-center gap-4">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 lg:h-5 lg:w-5 text-gray-500 dark:text-gray-400" />
+          <form onSubmit={handleSearch} className="flex flex-col sm:flex-row items-stretch gap-3 w-full">
+            <div className="flex-1 min-w-0 relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 dark:text-gray-400" />
               <Input
                 type="text"
                 placeholder="Buscar productos..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 text-sm lg:text-base"
+                className="w-full pl-10 pr-3 text-sm"
               />
             </div>
-            <Select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              options={categories.map((category) => ({
-                value: category,
-                label: category === 'all' ? 'Todas las categorías' : category,
-              }))}
-              placeholder="Seleccionar categoría"
-              className="w-full lg:w-auto"
-            />
+            
+            <div className="w-full sm:w-48 lg:w-56">
+              <Select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                options={categories.map((category) => ({
+                  value: category,
+                  label: category === 'all' ? 'Todas las categorías' : category,
+                }))}
+                placeholder="Categorías"
+                className="w-full"
+              />
+            </div>
+            
             <Button
               type="submit"
               variant="primary"
               size="sm"
               icon={Filter}
               iconPosition="left"
-              className="w-full lg:w-auto"
+              className="w-full sm:w-auto min-w-[120px]"
             >
               <span className="hidden sm:inline">Filtrar</span>
               <span className="sm:hidden">Buscar</span>
@@ -237,179 +241,15 @@ export const ProductsPage: React.FC = () => {
           </form>
         </motion.div>
 
-        {/* Tabla de Productos - Desktop */}
+        {/* Lista de Productos - Mobile & Tablet */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="rounded-lg shadow-md overflow-hidden hidden lg:block"
+          className="space-y-4 w-full"
         >
           {loading ? (
-            <div className="p-8 text-center">
-              <Typography variant="body" color="muted">
-                Cargando productos...
-              </Typography>
-            </div>
-          ) : (
-            <>
-              <div className="overflow-x-auto w-full">
-                <table className="w-full max-w-full table-auto">
-                  <thead className="">
-                    <tr>
-                      <th className="px-6 py-3 text-left">
-                        <Typography variant="overline" color="muted">
-                          Producto
-                        </Typography>
-                      </th>
-                      <th className="px-6 py-3 text-left">
-                        <Typography variant="overline" color="muted">
-                          Precio
-                        </Typography>
-                      </th>
-                      <th className="px-6 py-3 text-left">
-                        <Typography variant="overline" color="muted">
-                          Stock
-                        </Typography>
-                      </th>
-                      <th className="px-6 py-3 text-left">
-                        <Typography variant="overline" color="muted">
-                          Categoría
-                        </Typography>
-                      </th>
-                      <th className="px-6 py-3 text-left">
-                        <Typography variant="overline" color="muted">
-                          Acciones
-                        </Typography>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200 dark:divide-gray-600">
-                    {products.map((product, index) => (
-                      <motion.tr
-                        key={product._id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="hover:bg-gray-50 dark:hover:bg-gray-700"
-                      >
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-3 min-w-0">
-                            {product.images[0] && (
-                              <img
-                                src={product.images[0]}
-                                alt={product.title}
-                                className="w-10 h-10 object-cover rounded"
-                              />
-                            )}
-                            <div>
-                              <Typography variant="h6" color="default" className="text-sm lg:text-base">
-                                {product.title}
-                              </Typography>
-                              <Typography variant="caption" color="muted" className="line-clamp-1 text-xs">
-                                {product.description}
-                              </Typography>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <Typography variant="body" color="default" className="text-sm lg:text-base">
-                            {product.currency} {product.price.toFixed(2)}
-                          </Typography>
-                        </td>
-                        <td className="px-8 py-4">
-                          <div className="flex items-center gap-2 min-w-0">
-                            <span
-                              className={`px-2 py-1 rounded-full text-xs ${getStatusColor(
-                                product.stock > 10 ? 'paid' : 'failed'
-                              )}`}
-                            >
-                              <Typography variant="caption" color={product.stock > 10 ? 'success' : 'error'}>
-                                {product.stock} unidades
-                              </Typography>
-                            </span>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-2">
-                            <span className={`px-2 py-1 rounded-full text-xs ${getStatusColor('paid')}`}>
-                              <Typography variant="caption" color="primary">
-                                {product.category}
-                              </Typography>
-                            </span>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-2">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              icon={Edit}
-                              onClick={() => handleEdit(product)}
-                              title="Editar producto" children={undefined}                            />
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              icon={Trash2}
-                              onClick={() => handleDelete(product._id)}
-                              title="Eliminar producto"
-                              className="text-error-500 hover:text-error-600" children={undefined}                            />
-                          </div>
-                        </td>
-                      </motion.tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* Paginación */}
-              {pagination && pagination.totalPages > 1 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="px-6 py-4 border-t border-gray-200 dark:border-gray-600"
-                >
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <Typography variant="body" color="muted" className="text-sm">
-                      Mostrando {products.length} de {pagination.totalProducts} productos
-                    </Typography>
-                    <div className="flex items-center gap-4">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => fetchProducts(pagination.currentPage - 1)}
-                        disabled={!pagination.hasPrev}
-                      >
-                        Anterior
-                      </Button>
-                      <Typography variant="body" color="muted" className="text-sm">
-                        Página {pagination.currentPage} de {pagination.totalPages}
-                      </Typography>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => fetchProducts(pagination.currentPage + 1)}
-                        disabled={!pagination.hasNext}
-                      >
-                        Siguiente
-                      </Button>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </>
-          )}
-        </motion.div>
-
-        {/* Lista de Productos - Mobile */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="lg:hidden space-y-4 w-full"
-        >
-          {loading ? (
-            <div className="p-8 text-center rounded-lg shadow-md">
+            <div className="p-8 text-center rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
               <Typography variant="body" color="muted">
                 Cargando productos...
               </Typography>
@@ -421,34 +261,44 @@ export const ProductsPage: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="rounded-lg shadow-md p-4"
+                className="rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 w-full"
               >
-                <div className="flex justify-between items-start mb-3">
-                  <div className="flex items-start gap-3 flex-1">
+                <div className="flex justify-between items-start gap-3 mb-3 w-full">
+                  <div className="flex items-start gap-3 flex-1 min-w-0">
                     {product.images[0] && (
                       <img
                         src={product.images[0]}
                         alt={product.title}
-                        className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
+                        className="w-12 h-12 object-cover rounded flex-shrink-0"
                       />
                     )}
                     <div className="flex-1 min-w-0">
-                      <Typography variant="h6" color="default" className="text-sm font-medium truncate">
+                      <Typography 
+                        variant="h6" 
+                        color="default" 
+                        className="text-sm font-medium break-words"
+                      >
                         {product.title}
                       </Typography>
-                      <Typography variant="caption" color="muted" className="text-xs line-clamp-2">
+                      <Typography 
+                        variant="caption" 
+                        color="muted" 
+                        className="text-xs line-clamp-2 break-words"
+                      >
                         {product.description}
                       </Typography>
                     </div>
                   </div>
-                  <div className="relative">
+                  <div className="relative flex-shrink-0">
                     <Button
                       variant="ghost"
                       size="sm"
                       icon={MoreVertical}
-                      onClick={() => setMobileMenuOpen(mobileMenuOpen === product._id ? null : product._id)} children={undefined}                    />
+                      onClick={() => setMobileMenuOpen(mobileMenuOpen === product._id ? null : product._id)}
+                      children={undefined}
+                    />
                     {mobileMenuOpen === product._id && (
-                      <div className="absolute right-0 top-8 bg-white dark:bg-gray-700 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 z-10 min-w-[120px]">
+                      <div className="absolute right-0 top-8 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 z-10 min-w-[120px]">
                         <button
                           onClick={() => handleEdit(product)}
                           className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-t-lg"
@@ -468,17 +318,17 @@ export const ProductsPage: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                  <div>
-                    <Typography variant="caption" color="muted">
+                <div className="grid grid-cols-2 gap-4 text-xs w-full">
+                  <div className="space-y-1">
+                    <Typography variant="caption" color="muted" className="block">
                       Precio
                     </Typography>
-                    <Typography variant="body" color="default" className="font-medium">
+                    <Typography variant="body" color="default" className="font-medium text-sm">
                       {product.currency} {product.price.toFixed(2)}
                     </Typography>
                   </div>
-                  <div>
-                    <Typography variant="caption" color="muted">
+                  <div className="space-y-1">
+                    <Typography variant="caption" color="muted" className="block">
                       Stock
                     </Typography>
                     <span
@@ -491,8 +341,8 @@ export const ProductsPage: React.FC = () => {
                       </Typography>
                     </span>
                   </div>
-                  <div className="col-span-2">
-                    <Typography variant="caption" color="muted">
+                  <div className="col-span-2 space-y-1">
+                    <Typography variant="caption" color="muted" className="block">
                       Categoría
                     </Typography>
                     <span className={`px-2 py-1 rounded-full ${getStatusColor('paid')}`}>
@@ -506,19 +356,19 @@ export const ProductsPage: React.FC = () => {
             ))
           )}
 
-          {/* Paginación Mobile */}
+          {/* Paginación */}
           {pagination && pagination.totalPages > 1 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className=" rounded-lg shadow-md p-4"
+              className="rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 w-full"
             >
-              <div className="flex flex-col items-center gap-4">
-                <Typography variant="body" color="muted" className="text-sm text-center">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
+                <Typography variant="body" color="muted" className="text-sm text-center sm:text-left">
                   Mostrando {products.length} de {pagination.totalProducts} productos
                 </Typography>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                   <Button
                     variant="outline"
                     size="sm"
@@ -527,7 +377,7 @@ export const ProductsPage: React.FC = () => {
                   >
                     Anterior
                   </Button>
-                  <Typography variant="body" color="muted" className="text-sm">
+                  <Typography variant="body" color="muted" className="text-sm min-w-[80px] text-center">
                     {pagination.currentPage}/{pagination.totalPages}
                   </Typography>
                   <Button

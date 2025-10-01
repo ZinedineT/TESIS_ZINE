@@ -22,7 +22,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({ children, className = ''
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
           background: theme === 'dark'
-            ? "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000"
+            ? "radial-gradient(ellipse 100% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000"
             : "radial-gradient(125% 125% at 50% 90%, #fff 40%, #b3c1ff 100%)"
         }}
       />

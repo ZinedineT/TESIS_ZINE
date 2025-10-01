@@ -45,7 +45,7 @@ const Select: React.FC<SelectProps> = ({
         value={value}
         onChange={onChange}
         className={`
-          block w-full px-3 py-2 
+          block w-full px-3 py-2 text-sm
           border rounded-lg 
           shadow-sm 
           bg-white dark:bg-gray-800 
@@ -55,7 +55,6 @@ const Select: React.FC<SelectProps> = ({
           focus:ring-2 
           focus:ring-primary-500 
           focus:border-primary-500
-          [&_option]:text-gray-900 dark:[&_option]:text-gray-400
         `}
       >
         {placeholder && (
@@ -153,20 +152,20 @@ export const UsersPage: React.FC = () => {
   };
 
   return (
-    <div className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen w-full">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="space-y-6"
+        className="w-full max-w-full px-3 sm:px-4 py-4 mx-auto"
       >
         {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <Typography variant="h1" color="default" className="mb-2">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
+          <div className="flex-1 min-w-0">
+            <Typography variant="h1" color="default" className="text-xl sm:text-2xl mb-2">
               Usuarios
             </Typography>
-            <Typography variant="body" color="muted">
+            <Typography variant="body" color="muted" className="text-sm sm:text-base">
               Gestiona los usuarios del sistema ({pagination?.totalUsers || 0} total)
             </Typography>
           </div>
@@ -177,223 +176,188 @@ export const UsersPage: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md"
+          className="rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700 w-full mb-6"
         >
-          <form onSubmit={handleSearch} className="flex flex-col sm:flex-row items-center gap-4">
-            <div className="flex-1 relative min-w-[200px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 dark:text-gray-400" />
+          <form onSubmit={handleSearch} className="flex flex-col sm:flex-row items-stretch gap-3 w-full">
+            <div className="flex-1 min-w-0 relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 dark:text-gray-400" />
               <Input
                 type="text"
                 placeholder="Buscar por nombre o email..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
+                className="w-full pl-10 pr-3 text-sm"
               />
             </div>
-            <Select
-              value={roleFilter}
-              onChange={(e) => setRoleFilter(e.target.value)}
-              options={[
-                { value: 'all', label: 'Todos los roles' },
-                { value: 'admin', label: 'Administradores' },
-                { value: 'customer', label: 'Clientes' },
-              ]}
-              placeholder="Seleccionar rol"
-              className="min-w-[200px]"
-            />
+            
+            <div className="w-full sm:w-48 lg:w-56">
+              <Select
+                value={roleFilter}
+                onChange={(e) => setRoleFilter(e.target.value)}
+                options={[
+                  { value: 'all', label: 'Todos los roles' },
+                  { value: 'admin', label: 'Administradores' },
+                  { value: 'customer', label: 'Clientes' },
+                ]}
+                placeholder="Rol"
+                className="w-full"
+              />
+            </div>
+            
             <Button
               type="submit"
               variant="primary"
               size="sm"
               icon={Filter}
               iconPosition="left"
+              className="w-full sm:w-auto min-w-[120px]"
             >
               Filtrar
             </Button>
           </form>
         </motion.div>
 
-        {/* Tabla de Usuarios */}
+        {/* Lista de Usuarios - Mobile & Tablet */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden"
+          className="space-y-4 w-full"
         >
           {loading ? (
-            <div className="p-8 text-center">
+            <div className="p-8 text-center rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
               <Typography variant="body" color="muted">
                 Cargando usuarios...
               </Typography>
             </div>
           ) : (
-            <>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50 dark:bg-gray-700">
-                    <tr>
-                      <th className="px-6 py-3 text-left">
-                        <Typography variant="overline" color="muted">
-                          Usuario
-                        </Typography>
-                      </th>
-                      <th className="px-6 py-3 text-left">
-                        <Typography variant="overline" color="muted">
-                          Email
-                        </Typography>
-                      </th>
-                      <th className="px-6 py-3 text-left">
-                        <Typography variant="overline" color="muted">
-                          Rol
-                        </Typography>
-                      </th>
-                      <th className="px-6 py-3 text-left">
-                        <Typography variant="overline" color="muted">
-                          Estado
-                        </Typography>
-                      </th>
-                      <th className="px-6 py-3 text-left">
-                        <Typography variant="overline" color="muted">
-                          Fecha Registro
-                        </Typography>
-                      </th>
-                      <th className="px-6 py-3 text-left">
-                        <Typography variant="overline" color="muted">
-                          Acciones
-                        </Typography>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200 dark:divide-gray-600">
-                    {users.map((user, index) => (
-                      <motion.tr
-                        key={user._id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="hover:bg-gray-50 dark:hover:bg-gray-700"
-                      >
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-3">
-                            <div className="bg-primary-100 dark:bg-primary-900/30 p-2 rounded-full">
-                              <User className="h-5 w-5 text-primary-600 dark:text-primary-300" />
-                            </div>
-                            <div>
-                              <Typography variant="h6" color="default">
-                                {user.name}
-                              </Typography>
-                              <Typography variant="caption" color="muted">
-                                ID: {user._id.slice(-8)}
-                              </Typography>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-2">
-                            <Mail className="h-4 w-4 text-gray-400 dark:text-gray-500" />
-                            <Typography variant="body" color="muted">
-                              {user.email}
-                            </Typography>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-2">
-                            <span className={`px-2 py-1 rounded-full text-xs ${getRoleColor(user.role)}`}>
-                              <Typography variant="caption" color={user.role === 'admin' ? 'primary' : 'secondary'}>
-                                {user.role}
-                              </Typography>
-                            </span>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-2">
-                            <span
-                              className={`px-2 py-1 rounded-full text-xs ${getStatusColor(
-                                user.isActive !== false ? 'paid' : 'failed'
-                              )}`}
-                            >
-                              <Typography
-                                variant="caption"
-                                color={user.isActive !== false ? 'success' : 'error'}
-                              >
-                                {user.isActive !== false ? 'Activo' : 'Inactivo'}
-                              </Typography>
-                            </span>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4 text-gray-400 dark:text-gray-500" />
-                            <Typography variant="caption" color="muted">
-                              {formatDate(user.createdAt)}
-                            </Typography>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-2">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              icon={user.isActive !== false ? UserX : UserCheck}
-                              onClick={() => toggleUserStatus(user._id, user.isActive !== false)}
-                              title={user.isActive !== false ? 'Desactivar usuario' : 'Activar usuario'}
-                              className={user.isActive !== false
-                                ? 'text-error-500 hover:text-error-600'
-                                : 'text-success-500 hover:text-success-600'} children={undefined}                            />
-                            {user.role !== 'admin' && (
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                icon={Trash2}
-                                onClick={() => deleteUser(user._id)}
-                                title="Eliminar usuario"
-                                className="text-error-500 hover:text-error-600" children={undefined}                              />
-                            )}
-                          </div>
-                        </td>
-                      </motion.tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* Paginación */}
-              {pagination && pagination.totalPages > 1 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="px-6 py-4 border-t border-gray-200 dark:border-gray-600"
-                >
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <Typography variant="body" color="muted">
-                      Mostrando {users.length} de {pagination.totalUsers} usuarios
-                    </Typography>
-                    <div className="flex items-center gap-4">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => fetchUsers(pagination.currentPage - 1)}
-                        disabled={!pagination.hasPrev}
-                      >
-                        Anterior
-                      </Button>
-                      <Typography variant="body" color="muted">
-                        Página {pagination.currentPage} de {pagination.totalPages}
+            users.map((user, index) => (
+              <motion.div
+                key={user._id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 w-full"
+              >
+                {/* Header del usuario */}
+                <div className="flex justify-between items-start gap-3 mb-3 w-full">
+                  <div className="flex items-start gap-3 flex-1 min-w-0">
+                    <div className="p-2 rounded-full flex-shrink-0">
+                      <User className="h-5 w-5 text-primary-600 dark:text-primary-300" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <Typography variant="h6" color="default" className="text-sm font-medium break-words">
+                        {user.name}
                       </Typography>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => fetchUsers(pagination.currentPage + 1)}
-                        disabled={!pagination.hasNext}
-                      >
-                        Siguiente
-                      </Button>
+                      <Typography variant="caption" color="muted" className="text-xs break-words">
+                        ID: {user._id.slice(-8)}
+                      </Typography>
                     </div>
                   </div>
-                </motion.div>
-              )}
-            </>
+                  <div className="flex flex-col items-end gap-2 flex-shrink-0">
+                    <span className={`px-2 py-1 rounded-full text-xs ${getRoleColor(user.role)}`}>
+                      <Typography variant="caption" color={user.role === 'admin' ? 'primary' : 'secondary'}>
+                        {user.role}
+                      </Typography>
+                    </span>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs ${getStatusColor(
+                        user.isActive !== false ? 'paid' : 'failed'
+                      )}`}
+                    >
+                      <Typography
+                        variant="caption"
+                        color={user.isActive !== false ? 'success' : 'error'}
+                      >
+                        {user.isActive !== false ? 'Activo' : 'Inactivo'}
+                      </Typography>
+                    </span>
+                  </div>
+                </div>
+
+                {/* Información del usuario */}
+                <div className="mb-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Mail className="h-4 w-4 text-gray-400 dark:text-gray-500 flex-shrink-0" />
+                    <Typography variant="body" color="muted" className="text-sm break-words">
+                      {user.email}
+                    </Typography>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4 text-gray-400 dark:text-gray-500 flex-shrink-0" />
+                    <Typography variant="caption" color="muted" className="text-xs">
+                      Registrado: {formatDate(user.createdAt)}
+                    </Typography>
+                  </div>
+                </div>
+
+                {/* Acciones */}
+                <div className="flex items-center gap-2 pt-3 border-t border-gray-200 dark:border-gray-600">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    icon={user.isActive !== false ? UserX : UserCheck}
+                    onClick={() => toggleUserStatus(user._id, user.isActive !== false)}
+                    title={user.isActive !== false ? 'Desactivar usuario' : 'Activar usuario'}
+                    className={`flex-1 text-xs ${
+                      user.isActive !== false
+                        ? 'text-error-500 hover:text-error-600'
+                        : 'text-success-500 hover:text-success-600'
+                    }`}
+                    children={undefined}
+                  />
+                  
+                  {user.role !== 'admin' && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      icon={Trash2}
+                      onClick={() => deleteUser(user._id)}
+                      title="Eliminar usuario"
+                      className="flex-1 text-xs text-error-500 hover:text-error-600"
+                      children={undefined}
+                    />
+                  )}
+                </div>
+              </motion.div>
+            ))
+          )}
+
+          {/* Paginación */}
+          {pagination && pagination.totalPages > 1 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 w-full"
+            >
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
+                <Typography variant="body" color="muted" className="text-sm text-center sm:text-left">
+                  Mostrando {users.length} de {pagination.totalUsers} usuarios
+                </Typography>
+                <div className="flex items-center gap-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => fetchUsers(pagination.currentPage - 1)}
+                    disabled={!pagination.hasPrev}
+                  >
+                    Anterior
+                  </Button>
+                  <Typography variant="body" color="muted" className="text-sm min-w-[80px] text-center">
+                    {pagination.currentPage}/{pagination.totalPages}
+                  </Typography>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => fetchUsers(pagination.currentPage + 1)}
+                    disabled={!pagination.hasNext}
+                  >
+                    Siguiente
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
           )}
         </motion.div>
       </motion.div>

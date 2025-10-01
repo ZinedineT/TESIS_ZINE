@@ -5,6 +5,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        screns:{
+          'xs':'475px',
+        },
         primary: {
           50: '#f0f2ff',
           100: '#e6eaff',
