@@ -39,7 +39,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className = '
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
       className={`
-        bg-primary-200 dark:bg-gradient-to-r from-gray-800 to-gray-900
+        bg-primary-100 dark:bg-gradient-to-r from-gray-800 to-gray-900
         rounded-xl
         shadow-lg
         hover:shadow-xl

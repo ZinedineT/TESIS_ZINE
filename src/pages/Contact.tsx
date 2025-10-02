@@ -67,7 +67,7 @@ export const Contact: React.FC = () => {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 md:p-8"
+            className="bg-primary-100 dark:bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 md:p-8"
           >
             <img src="../../assets/logo.png" alt="" />
             <Typography variant="h3" color="default" className="text-primary-500 mb-6 font-montserrat">
@@ -167,7 +167,7 @@ export const Contact: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="space-y-8"
           >
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 md:p-8">
+            <div className="bg-primary-100 dark:bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 md:p-8">
               <Typography variant="h3" color="default" className="text-primary-500 mb-6 font-montserrat">
                 Información de Contacto
               </Typography>
@@ -223,7 +223,7 @@ export const Contact: React.FC = () => {
             </div>
 
             {/* Google Map */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 md:p-8">
+            <div className="bg-primary-100 dark:bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 md:p-8">
               <Typography variant="h3" color="default" className="text-primary-500 mb-4 font-montserrat">
                 Nuestra Ubicación
               </Typography>
