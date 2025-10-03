@@ -71,14 +71,14 @@ const Select: React.FC<SelectProps> = ({
         required={required}
         className={`
           block w-full px-3 py-2 text-sm
-          border rounded-lg 
-          shadow-sm 
-          bg-white dark:bg-gray-800 
-          text-gray-900 dark:text-gray-100 
-          border-gray-300 dark:border-gray-600 
-          focus:outline-none 
-          focus:ring-2 
-          focus:ring-primary-500 
+          border rounded-lg
+          shadow-sm
+          bg-white dark:bg-gray-800
+          text-gray-900 dark:text-gray-100
+          border-gray-300 dark:border-gray-600
+          focus:outline-none
+          focus:ring-2
+          focus:ring-primary-500
           focus:border-primary-500
         `}
       >
@@ -192,7 +192,7 @@ export const OrdersPage: React.FC = () => {
                 className="w-full pl-10 pr-3 text-sm"
               />
             </div>
-            
+
             <div className="w-full sm:w-48 lg:w-56">
               <Select
                 value={statusFilter}
@@ -207,7 +207,7 @@ export const OrdersPage: React.FC = () => {
                 className="w-full"
               />
             </div>
-            
+
             <Button
               type="submit"
               variant="primary"
@@ -254,21 +254,8 @@ export const OrdersPage: React.FC = () => {
                     </Typography>
                   </div>
                   <div className="flex-shrink-0">
-                    <span className={`px-2 py-1 rounded-full text-xs ${getStatusColor(order.paymentStatus)}`}>
-                      <Typography
-                        variant="caption"
-                        color={
-                          order.paymentStatus === 'paid'
-                            ? 'success'
-                            : order.paymentStatus === 'pending'
-                            ? 'warning'
-                            : order.paymentStatus === 'failed'
-                            ? 'error'
-                            : 'muted'
-                        }
-                      >
-                        {order.paymentStatus}
-                      </Typography>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(order.paymentStatus)}`}>
+                      {order.paymentStatus}
                     </span>
                   </div>
                 </div>

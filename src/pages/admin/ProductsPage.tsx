@@ -213,7 +213,7 @@ export const ProductsPage: React.FC = () => {
                 className="w-full pl-10 pr-3 text-sm"
               />
             </div>
-            
+
             <div className="w-full sm:w-48 lg:w-56">
               <Select
                 value={selectedCategory}
@@ -226,7 +226,7 @@ export const ProductsPage: React.FC = () => {
                 className="w-full"
               />
             </div>
-            
+
             <Button
               type="submit"
               variant="primary"
@@ -273,16 +273,16 @@ export const ProductsPage: React.FC = () => {
                       />
                     )}
                     <div className="flex-1 min-w-0">
-                      <Typography 
-                        variant="h6" 
-                        color="default" 
+                      <Typography
+                        variant="h6"
+                        color="default"
                         className="text-sm font-medium break-words"
                       >
                         {product.title}
                       </Typography>
-                      <Typography 
-                        variant="caption" 
-                        color="muted" 
+                      <Typography
+                        variant="caption"
+                        color="muted"
                         className="text-xs line-clamp-2 break-words"
                       >
                         {product.description}
@@ -317,8 +317,7 @@ export const ProductsPage: React.FC = () => {
                     )}
                   </div>
                 </div>
-                
-                <div className="grid grid-cols-2 gap-4 text-xs w-full">
+                <div className="grid grid-cols-3 gap-1 text-xs w-full">
                   <div className="space-y-1">
                     <Typography variant="caption" color="muted" className="block">
                       Precio
@@ -332,21 +331,25 @@ export const ProductsPage: React.FC = () => {
                       Stock
                     </Typography>
                     <span
-                      className={`px-2 py-1 rounded-full ${getStatusColor(
-                        product.stock > 10 ? 'paid' : 'failed'
-                      )}`}
+                      className={`px-2 py-1 rounded-full inline-block ${
+                        getStatusColor(product.stock > 10 ? 'paid' : 'failed')
+                      }`}
                     >
-                      <Typography variant="caption" color={product.stock > 10 ? 'success' : 'error'}>
+                      <Typography
+                        variant="caption"
+                        color={product.stock > 10 ? 'success' : 'error'}
+                        className="text-xs leading-none"
+                      >
                         {product.stock} unidades
                       </Typography>
                     </span>
                   </div>
-                  <div className="col-span-2 space-y-1">
+                  <div className="space-y-1">
                     <Typography variant="caption" color="muted" className="block">
                       Categoría
                     </Typography>
-                    <span className={`px-2 py-1 rounded-full ${getStatusColor('paid')}`}>
-                      <Typography variant="caption" color="primary">
+                    <span className={`px-2 py-1 rounded-full inline-block ${getStatusColor('paid')}`}>
+                      <Typography variant="caption" color="primary" className="text-xs leading-none">
                         {product.category}
                       </Typography>
                     </span>
