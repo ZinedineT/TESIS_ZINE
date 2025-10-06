@@ -23,7 +23,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({ children, className = ''
         style={{
           background: theme === 'dark'
             ? "radial-gradient(ellipse 100% 60% at 50% 0%, rgba(120, 180, 255, 0.25), transparent 70%), #000000"
-            : "radial-gradient(125% 125% at 50% 90%, #fff 40%, #b3c1ff 100%)"
+            : "radial-gradient(125% 125% at 50% 80%, #fff 40%, #b3c1ff 100%)"
         }}
       />
 

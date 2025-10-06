@@ -232,83 +232,117 @@ async function handleImageSubmit(e: React.FormEvent) {
             </Typography>
           </motion.div>
         )}
-        {/* --- Recomendación por imagen --- */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="py-16 border-t border-gray-200 dark:border-gray-700 mb-12"
-        >
-          <div className="max-w-4xl mx-auto text-center">
-            <Typography variant="h2" color="default" className="mb-4">
-              ¿Prefieres buscar por imagen?
-            </Typography>
+          {/* --- Recomendación por imagen --- */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="py-16 border-t border-gray-200 dark:border-gray-700 mb-12"
+          >
+            <div className={`max-w-6xl mx-auto grid items-center text-center md:text-left px-6 transition-all duration-500 ${
+              recommended.length > 0 ? 'md:grid-cols-1' : 'md:grid-cols-2'
+            }`}>
+              {/* --- LADO IZQUIERDO: Imagen ilustrativa --- */}
+              {!recommended.length && (
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                className="flex justify-center"
+              >
+                <div className="relative w-full max-w-sm">
+                  {/* Puedes usar import o ruta pública, según tu proyecto */}
+                  <img
+                    src="/images/IA_RECOMMENDATION.jpg"
+                    alt="IA analizando imagen"
+                    className="w-full max-w-sm rounded-xl drop-shadow-lg"
+                  />
 
-            <form
-              onSubmit={handleImageSubmit}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            >
-              <input
-                type="file"
-                accept="image/*"
-                onChange={e => setImage(e.target.files?.[0] ?? null)}
-                className="block w-full text-sm text-gray-500
-                          file:mr-4 file:py-2 file:px-4
-                          file:rounded-full file:border-0
-                          file:text-sm file:font-semibold
-                          file:bg-primary-50 file:text-primary-700
-                          hover:file:bg-primary-100"
-              />
-              <Button type="submit" variant="primary" size="lg">
-                Buscar
-              </Button>
-            </form>
+                  {/* Efecto de escaneo animado */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-300/10 to-transparent animate-pulse-slow rounded-xl" />
+                </div>
+              </motion.div>
+              )}
 
-            {loadingRec && <p className="mt-4 text-gray-500">Analizando imagen…</p>}
-
-            {recommended.length > 0 && (
-              <div className="mt-8">
-                <Typography variant="h3" className="mb-4">
-                  {mainCategory 
-                    ? `Productos recomendados de ${mainCategory}`
-                    : 'Productos recomendados basados en tu imagen'
-                  }
+              {/* --- LADO DERECHO--- */}
+              <div>
+                <Typography variant="h2" color="default" className="mb-4 font-bold text-center md:text-left">
+                  ¿Prefieres buscar por imagen?
                 </Typography>
-                
-                {/* MEJORAR INFORMACIÓN DE ANÁLISIS */}
-                <div className="bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 p-4 rounded-lg mb-6">
-                  <Typography variant="h4" className="font-semibold mb-3">
-                    📊 Análisis de la imagen
-                  </Typography>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Typography variant="body" className="font-semibold">Términos identificados:</Typography>
-                      <Typography variant="body" color="muted">
-                        {searchTerms.join(', ') || 'No se identificaron términos específicos'}
-                      </Typography>
-                    </div>
-                    
-                    {mainCategory && (
-                      <div>
-                        <Typography variant="body" className="font-semibold">Categoría detectada:</Typography>
-                        <Typography variant="body" color="muted" className="text-green-600 dark:text-green-400">
-                          ✅ {mainCategory}
-                        </Typography>
-                      </div>
-                    )}
-                  </div>
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {recommended.map(product => (
-                    <ProductCard key={product._id} product={product} />
-                  ))}
-                </div>
+                <Typography variant="body" color="muted" className="mb-8 text-center md:text-left">
+                  Nuestra inteligencia artificial puede analizar una imagen y recomendarte productos similares.
+                  Sube tu foto y deja que la IA haga su magia 🤖✨
+                </Typography>
+
+                <form
+                  onSubmit={handleImageSubmit}
+                  className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center"
+                >
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={e => setImage(e.target.files?.[0] ?? null)}
+                    className="block w-full text-sm text-gray-500
+                              file:mr-4 file:py-2 file:px-4
+                              file:rounded-full file:border-0
+                              file:text-sm file:font-semibold
+                              file:bg-primary-50 file:text-primary-700
+                              hover:file:bg-primary-100"
+                  />
+                  <Button type="submit" variant="primary" size="lg">
+                    Buscar
+                  </Button>
+                </form>
+
+                {loadingRec && <p className="mt-4 text-gray-500 italic">⚙️ Analizando imagen un momento por favor...</p>}
+
+                {recommended.length > 0 && (
+                  <div className="mt-8">
+                    <Typography variant="h3" className="mb-4">
+                      {mainCategory 
+                        ? `Productos recomendados de ${mainCategory}`
+                        : 'Productos recomendados basados en tu imagen'
+                      }
+                    </Typography>
+                    
+                    {/* --- Análisis de imagen --- */}
+                    <div className="bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 p-4 rounded-lg mb-6">
+                      <Typography variant="h4" className="font-semibold mb-3">
+                        📊 Análisis de la imagen
+                      </Typography>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+                        <div>
+                          <Typography variant="body" className="font-semibold">Términos identificados:</Typography>
+                          <Typography variant="body" color="muted">
+                            {searchTerms.join(', ') || 'No se identificaron términos específicos'}
+                          </Typography>
+                        </div>
+                        
+                        {mainCategory && (
+                          <div>
+                            <Typography variant="body" className="font-semibold">Categoría detectada:</Typography>
+                            <Typography variant="body" color="muted" className="text-green-600 dark:text-green-400">
+                              ✅ {mainCategory}
+                            </Typography>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* --- Productos recomendados --- */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {recommended.map(product => (
+                        <ProductCard key={product._id} product={product} />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </motion.section>
+            </div>
+          </motion.section>
+
       </div>
     </div>
   );
