@@ -48,38 +48,45 @@ export function ChatbotFloat() {
     setLoading(false);
   };
 
-  // Función de formato MEJORADA
-  const formatMessage = (text: string) => {
-    return text.split('\n').map((line, i) => {
-      if (line.trim() === '') return <br key={i} />;
-      
-      // Detectar viñetas y números
-      if (line.startsWith('•') || line.startsWith('-') || /^\d+\./.test(line)) {
-        return (
-          <div key={i} className="flex items-start gap-2 ml-2">
-            <span>{line}</span>
-          </div>
-        );
-      }
-      
-      // Títulos o encabezados
-      if (line.includes(':')) {
-        return (
-          <p key={i} className="font-semibold text-secondary-800 dark:text-white mt-2">
-            {line}
-          </p>
-        );
-      }
-      
-      // Párrafos normales
+// ✅ Función de formato MEJORADA Y SEGURA
+const formatMessage = (text?: string) => {
+  if (!text || typeof text !== "string") {
+    return (
+      <p className="text-red-500 italic">
+        ⚠️ No se recibió respuesta del servidor. Por favor intenta nuevamente.
+      </p>
+    );
+  }
+
+  return text.split('\n').map((line, i) => {
+    if (line.trim() === '') return <br key={i} />;
+
+    // Detectar viñetas y números
+    if (line.startsWith('•') || line.startsWith('-') || /^\d+\./.test(line)) {
       return (
-        <p key={i} className="mt-1">
+        <div key={i} className="flex items-start gap-2 ml-2">
+          <span>{line}</span>
+        </div>
+      );
+    }
+
+    // Títulos o encabezados
+    if (line.includes(':')) {
+      return (
+        <p key={i} className="font-semibold text-secondary-800 dark:text-white mt-2">
           {line}
         </p>
       );
-    });
-  };
+    }
 
+    // Párrafos normales
+    return (
+      <p key={i} className="mt-1">
+        {line}
+      </p>
+    );
+  });
+};
   return (
     <>
       {/* Chat Window */}
@@ -134,7 +141,6 @@ export function ChatbotFloat() {
                     </div>
                   </div>
                 ))}
-
                 {loading && (
                   <div className="text-center text-xs text-secondary-400 py-2">
                     <div className="inline-flex items-center gap-1">
